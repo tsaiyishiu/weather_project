@@ -2,7 +2,7 @@
   <div id="app">
     <div class="main d-flex">
       <div class="container d-flex">
-        <div class="container_left">
+        <div class="container_now">
           <div class="background_city">
             <div class="Target">
               <h2 class="worship">Tuesday</h2>  
@@ -16,17 +16,44 @@
             </div> 
           </div>
         </div>
-        <div class="container_right ">
-          <div class="info_today">
+        <div class="container_future ">
+          <div class="info_current d-flex flex-column">
             <div class="precipitation">
               <span>precipitation</span>
               <span>0%</span>
             </div>
-            <div class=""></div>
-            <div class=""></div>
-            
-            
-            
+            <div class="humidity">
+              <span>humidity</span>
+              <span>34%</span>
+            </div>
+            <div class="wind">
+              <span>wind</span>
+              <span>0 km/h</span>
+            </div>
+          </div>
+          <div class="forecast_weather">
+            <div class="forecast_items d-flex justify-content-center">
+              <div class="dayone d-flex flex-column flex-fill justify-content-around">
+                <i class="fa-solid fa-sun "></i>
+                <span>Three</span>
+                <span>29°C</span>
+              </div>
+              <div class="daytwo d-flex flex-column flex-fill">
+                <i class="fa-solid fa-cloud-rain"></i>
+                <span>Four</span>
+                <span>29°C</span>
+              </div>
+              <div class="daythree d-flex flex-column flex-fill">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <span>Five</span>
+                <span>29°C</span>
+              </div>
+              <div class="dayfour d-flex flex-column flex-fill">
+                <i class="fa-solid fa-cloud-sun-rain"></i>
+                <span>Six</span>
+                <span>29°C</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -68,7 +95,7 @@
       .container{
       align-items: center;
       justify-content: center;
-        .container_left{
+        .container_now{
           background-image: url('@/assets/01.jpeg');
           background-repeat:no-repeat;
           background-size: cover;
@@ -92,16 +119,69 @@
             .current{
               padding-left:20px ;
               padding-top:160px ;
+              .fa-sun{
+                font-size: 50px;
+                padding-bottom: 10px;
+              }
             }  
           }
         }
-        .container_right{
+        .container_future{
         /* max-width: 100%; */
-        width: 500px;
-        height: 500px;
-        background:rgb(25, 19, 23);
-        border-radius: 0 10% 10% 0;
-        transform: translate(-40px, 0px);
+          width: 500px;
+          height: 500px;
+          background:#2c1725;
+          border-radius: 0 10% 10% 0;
+          transform: translate(-40px, 0px);
+          .info_current{
+            padding-left: 70px;
+            padding-top: 20px;
+            color:#c6a8a8;
+            font-weight: 700;
+            .precipitation span:nth-child(2){
+              float: right;
+              padding-right: 60px;
+            }
+            .humidity span:nth-child(2){
+              float: right;
+              padding-right: 60px;
+            }
+            .wind span:nth-child(2){
+              float: right;
+              padding-right: 60px;
+            }
+          }
+          .forecast_weather{
+            background: red;
+            //margin-left: 70px;
+            //margin-right: 60px;
+            //margin-top: 40px;
+            transform: translateX(0px);
+            .forecast_items{
+              //padding: 40px 0px 40px 0px;
+              text-align: center;
+              .dayone{
+                .fa-sun{
+                  font-size: 30px;
+                }
+              }
+              .daytwo{
+                .fa-cloud-rain{
+                  font-size: 30px;
+                }
+              }
+              .daythree{
+                .fa-cloud-sun{
+                  font-size: 30px;
+                }
+              }
+              .dayfour{
+                .fa-cloud-sun-rain{
+                  font-size: 30px;
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -113,10 +193,7 @@
   
   
   
-  .fa-sun{
-    font-size: 50px;
-    padding-bottom: 10px;
-  }
+  
 </style>
 
 
