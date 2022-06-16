@@ -6,31 +6,31 @@
           <div class="container_now">
             <div class="background_city">
               <div class="Target">
-                <h2 class="worship">Tuesday</h2>  
-                <h3 class="year month day">15 Jan 2022</h3>
-                <h3 class="Place">taipei</h3>
+                <h2 class="worship">{{ howDay }}</h2>  
+                <h3 class="year month day">{{ yearMonthDay }}</h3>
+                <h3 class="Place">{{ howPlace }}</h3>
               </div>
               <div class="current">
                 <i class="fa-solid fa-sun"></i>
-                <h3 class="temperature">29°C</h3>
-                <h3 class="weather-desc">weather-desc</h3>
+                <h3 class="temperature">{{ howTemperature }} &#8451;</h3>
+                <h3 class="weather-desc">{{ howWeather }}</h3>
               </div> 
             </div>
           </div>
           <div class="container_future ">
             <div class="info_current d-flex flex-column">
-              <div class="precipitation">
-                <span>precipitation</span>
-                <span>0%</span>
+              <div v-for="item in items" :key='item.message' class="precipitation">
+                <span>{{ item.message}}</span>
+                <!-- <span>0%</span> -->
               </div>
-              <div class="humidity">
+              <!-- <div class="humidity">
                 <span>humidity</span>
                 <span>34%</span>
               </div>
               <div class="wind">
                 <span>wind</span>
                 <span>0 km/h</span>
-              </div>
+              </div> -->
             </div>
             <div class="forecast_weather">
               <div class="forecast_items d-flex justify-content-center">
@@ -72,6 +72,7 @@
     1.分頁 轉換頁面 路由器router （vue router後續）
     2.首頁漂亮練切版，天氣預報為主題 皆天氣預報api
     3.副頁欄位 輸入名字電話信箱地址 送入localstrogi
+    看30天接api
     
     
    -->
@@ -81,7 +82,16 @@
   export default {
     data() {
       return {
-       
+        howDay:'???',
+        yearMonthDay:'??? ??? ???',
+        howPlace:'???',
+        howTemperature:'?',
+        howWeather:'???',
+        items:[
+          {message:'precipitation'},
+          {message:'humidity'},
+          {message:'wind'},
+        ]
       }
     },
      methods: {
