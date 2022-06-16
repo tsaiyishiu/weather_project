@@ -1,64 +1,71 @@
 <template>
   <div id="app">
     <div class="main d-flex">
-      <div class="container d-flex">
-        <div class="container_now">
-          <div class="background_city">
-            <div class="Target">
-              <h2 class="worship">Tuesday</h2>  
-              <h3 class="year month day">15 Jan 2022</h3>
-              <h3 class="Place">taipei</h3>
-            </div>
-            <div class="current">
-              <i class="fa-solid fa-sun"></i>
-              <h3 class="temperature">29°C</h3>
-              <h3 class="weather-desc">weather-desc</h3>
-            </div> 
-          </div>
-        </div>
-        <div class="container_future ">
-          <div class="info_current d-flex flex-column">
-            <div class="precipitation">
-              <span>precipitation</span>
-              <span>0%</span>
-            </div>
-            <div class="humidity">
-              <span>humidity</span>
-              <span>34%</span>
-            </div>
-            <div class="wind">
-              <span>wind</span>
-              <span>0 km/h</span>
+      <div class="container d-flex align-items-center">
+        <div class="container_under d-flex ">
+          <div class="container_now">
+            <div class="background_city">
+              <div class="Target">
+                <h2 class="worship">Tuesday</h2>  
+                <h3 class="year month day">15 Jan 2022</h3>
+                <h3 class="Place">taipei</h3>
+              </div>
+              <div class="current">
+                <i class="fa-solid fa-sun"></i>
+                <h3 class="temperature">29°C</h3>
+                <h3 class="weather-desc">weather-desc</h3>
+              </div> 
             </div>
           </div>
-          <div class="forecast_weather">
-            <div class="forecast_items d-flex justify-content-center">
-              <div class="dayone d-flex flex-column flex-fill justify-content-around">
-                <i class="fa-solid fa-sun "></i>
-                <span>Three</span>
-                <span>29°C</span>
+          <div class="container_future ">
+            <div class="info_current d-flex flex-column">
+              <div class="precipitation">
+                <span>precipitation</span>
+                <span>0%</span>
               </div>
-              <div class="daytwo d-flex flex-column flex-fill">
-                <i class="fa-solid fa-cloud-rain"></i>
-                <span>Four</span>
-                <span>29°C</span>
+              <div class="humidity">
+                <span>humidity</span>
+                <span>34%</span>
               </div>
-              <div class="daythree d-flex flex-column flex-fill">
-                <i class="fa-solid fa-cloud-sun"></i>
-                <span>Five</span>
-                <span>29°C</span>
-              </div>
-              <div class="dayfour d-flex flex-column flex-fill">
-                <i class="fa-solid fa-cloud-sun-rain"></i>
-                <span>Six</span>
-                <span>29°C</span>
+              <div class="wind">
+                <span>wind</span>
+                <span>0 km/h</span>
               </div>
             </div>
-          </div>
+            <div class="forecast_weather">
+              <div class="forecast_items d-flex justify-content-center">
+                <div class="dayone d-flex flex-column flex-fill justify-content-around">
+                  <i class="fa-solid fa-sun "></i>
+                  <span>Three</span>
+                  <span>29°C</span>
+                </div>
+                <div class="daytwo d-flex flex-column flex-fill justify-content-around">
+                  <i class="fa-solid fa-cloud-rain"></i>
+                  <span>Four</span>
+                  <span>29°C</span>
+                </div>
+                <div class="daythree d-flex flex-column flex-fill justify-content-around">
+                  <i class="fa-solid fa-cloud-sun"></i>
+                  <span>Five</span>
+                  <span>29°C</span>
+                </div>
+                <div class="dayfour d-flex flex-column flex-fill justify-content-around">
+                  <i class="fa-solid fa-cloud-sun-rain"></i>
+                  <span>Six</span>
+                  <span>29°C</span>
+                </div>
+              </div>
+            </div>
+            <div class="place_items">
+              <button class="place_item">
+                  <i class="fa-solid fa-location-dot"></i>
+                  <span>Change location</span>
+              </button>
+            </div>
+          </div>  
         </div>
       </div>
     </div>
-    
   </div>
 
   <!--
@@ -132,9 +139,9 @@
           height: 500px;
           background:#2c1725;
           border-radius: 0 10% 10% 0;
-          transform: translate(-40px, 0px);
+          //transform: translate(-40px, 0px);
           .info_current{
-            padding-left: 70px;
+            padding-left: 40px;
             padding-top: 20px;
             color:#c6a8a8;
             font-weight: 700;
@@ -153,38 +160,49 @@
           }
           .forecast_weather{
             background: red;
-            //margin-left: 70px;
-            //margin-right: 60px;
-            //margin-top: 40px;
-            transform: translateX(0px);
+            margin: 20px 40px 0px 40px;
+            height: 250px;
             .forecast_items{
               //padding: 40px 0px 40px 0px;
+              height: 100%;
               text-align: center;
               .dayone{
                 .fa-sun{
-                  font-size: 30px;
+                  font-size: 50px;
                 }
               }
               .daytwo{
                 .fa-cloud-rain{
-                  font-size: 30px;
+                  font-size: 50px;
                 }
               }
               .daythree{
                 .fa-cloud-sun{
-                  font-size: 30px;
+                  font-size: 50px;
                 }
               }
               .dayfour{
                 .fa-cloud-sun-rain{
-                  font-size: 30px;
+                  font-size: 50px;
                 }
               }
+            }
+          }
+          .place_items{
+            text-align: center;
+            padding: 40px;
+            .place_item{
+              width: 80%;
+              height: 40px; 
             }
           }
         }
       }
     }
+  }
+  .container_under{
+    border-radius: 10%;
+    background-color:#2c1725;
   }
   
   
