@@ -21,7 +21,7 @@
             <div class="info_current d-flex flex-column">
               <div v-for="item in items" :key='item.message' class="precipitation">
                 <span>{{ item.message }}</span>
-                <!-- <span>{{ item.messageData }}%</span> -->
+                <span>{{ item.messageData }}{{ item.messageunit}}</span>
               </div>
               <!-- <div class="humidity">
                 <span>humidity</span>
@@ -84,25 +84,33 @@
       this.getApi()
       this.day()
       this.yearmonthday()
+      //this.cityApi()
     },
     data() {
       return {
         howDay:'' ,
-        yearMonthDay:'??? ??? ???',
+        yearMonthDay:'',
         howPlace:'???',
         howTemperature:'?',
         howWeather:'???',
         items:[
-          {message:'precipitation'},
-          {message:'humidity'},
-          {message:'wind'},
-          {messageData:'?'},
-          {messageData:'?'},
-          {messageData:'?'},
+          {message:'precipitation',
+           messageData:'???',
+           messageunit:'%'
+          },
+          {message:'humidity',
+           messageData:'???',
+           messageunit:'%'
+          },
+          {message:'wind',
+           messageData:'???',
+           messageunit:'km/h',
+          },
         ],
         info : null,
         weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
+        city:[]
       }
     },
     methods: {
@@ -110,7 +118,6 @@
         const birthday = new Date();
         const day1 = birthday.getDay();
         // Sunday - Saturday : 0 - 6
-        console.log(day1);
         this.howDay = this.weekDay[day1]
       },
       yearmonthday: function() {
@@ -125,16 +132,30 @@
           // .get('https://api.coindesk.com/v1/bpi/currentprice.json')
           // .then(response => (this.info = response.data.bpi))
           // .catch(error => console.log(error)) 
-        .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-063?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821' ) 
-        .then ( response => ( console.log(response.data.records) ) ) 
+        .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821&locationId=F-D0047-063' ) 
+        .then ( response => { 
+          console.log(response)
+          this.cityApi(response)
+        } ) 
         .catch ( 
         function ( error ) { //請求失敗處理   
         console . log ( error ) ;
         } ) 
-      }
+        
+      },
+      cityApi: function(response){
+        const citys = response.data.records.locations[0].location 
+        // const city =  citys.filter(city =>{
+        //   city.geocode = 63000020
+        // })
+        console.log(citys)  
+      },
     },
     
   }
+
+
+  
 </script>
 
 <style lang="scss">
