@@ -20,8 +20,8 @@
           <div class="container_future ">
             <div class="info_current d-flex flex-column">
               <div v-for="item in items" :key='item.message' class="precipitation">
-                <span>{{ item.message}}</span>
-                <!-- <span>0%</span> -->
+                <span>{{ item.message }}</span>
+                <!-- <span>{{ item.messageData }}%</span> -->
               </div>
               <!-- <div class="humidity">
                 <span>humidity</span>
@@ -34,22 +34,22 @@
             </div>
             <div class="forecast_weather">
               <div class="forecast_items d-flex justify-content-center">
-                <div class="dayone d-flex flex-column flex-fill justify-content-around">
+                <div class="dayone d-flex flex-column col-3 justify-content-around">
                   <i class="fa-solid fa-sun "></i>
                   <span>Three</span>
                   <span>29°C</span>
                 </div>
-                <div class="daytwo d-flex flex-column flex-fill justify-content-around">
+                <div class="daytwo d-flex flex-column col-3 justify-content-around">
                   <i class="fa-solid fa-cloud-rain"></i>
                   <span>Four</span>
                   <span>29°C</span>
                 </div>
-                <div class="daythree d-flex flex-column flex-fill justify-content-around">
+                <div class="daythree d-flex flex-column col-3 justify-content-around">
                   <i class="fa-solid fa-cloud-sun"></i>
                   <span>Five</span>
                   <span>29°C</span>
                 </div>
-                <div class="dayfour d-flex flex-column flex-fill justify-content-around">
+                <div class="dayfour d-flex flex-column col-3 justify-content-around">
                   <i class="fa-solid fa-cloud-sun-rain"></i>
                   <span>Six</span>
                   <span>29°C</span>
@@ -73,16 +73,21 @@
     2.首頁漂亮練切版，天氣預報為主題 皆天氣預報api
     3.副頁欄位 輸入名字電話信箱地址 送入localstrogi
     看30天接api
-    
+    授權碼：CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821
     
    -->
 </template>
 
-<script>
+<script>    
   export default {
+    mounted(){
+      this.getApi()
+      this.day()
+      this.yearmonthday()
+    },
     data() {
       return {
-        howDay:'???',
+        howDay:'' ,
         yearMonthDay:'??? ??? ???',
         howPlace:'???',
         howTemperature:'?',
@@ -91,12 +96,44 @@
           {message:'precipitation'},
           {message:'humidity'},
           {message:'wind'},
-        ]
+          {messageData:'?'},
+          {messageData:'?'},
+          {messageData:'?'},
+        ],
+        info : null,
+        weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
       }
     },
-     methods: {
-      
+    methods: {
+      day: function() {   //顯示星期
+        const birthday = new Date();
+        const day1 = birthday.getDay();
+        // Sunday - Saturday : 0 - 6
+        console.log(day1);
+        this.howDay = this.weekDay[day1]
+      },
+      yearmonthday: function() {
+        const myDate = new Date(); 
+        const yearMonThday = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
+        // const yearMonThday = `${myDate.getFullYear()} ${this.monthDay[myDate.getMonth()]} ${myDate.getDate()}`
+        //console.log(yearmonthday)
+        this.yearMonthDay = yearMonThday
+      },
+      getApi: function() {
+        this.axios
+          // .get('https://api.coindesk.com/v1/bpi/currentprice.json')
+          // .then(response => (this.info = response.data.bpi))
+          // .catch(error => console.log(error)) 
+        .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-063?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821' ) 
+        .then ( response => ( console.log(response.data.records) ) ) 
+        .catch ( 
+        function ( error ) { //請求失敗處理   
+        console . log ( error ) ;
+        } ) 
+      }
     },
+    
   }
 </script>
 
@@ -169,29 +206,61 @@
             }
           }
           .forecast_weather{
-            background: red;
+            //background: red;
             margin: 20px 40px 0px 40px;
             height: 250px;
             .forecast_items{
               //padding: 40px 0px 40px 0px;
+              color: #f18a45;
+              background-color:#241a27;
               height: 100%;
               text-align: center;
+              font-size: 30px;
+
+              .dayone:hover{
+                color: #2c1725;
+                background-color:#c6a8a8;
+                transition: 0.4s;
+              }
               .dayone{
+                background-color:#241a27;
+                border-radius: 20px;
                 .fa-sun{
                   font-size: 50px;
                 }
               }
+              .daytwo:hover{
+                color: #2c1725;
+                background-color: #c6a8a8;
+                transition: 0.4s;
+              }
               .daytwo{
+                background-color: #241a27;
+                border-radius: 20px;
                 .fa-cloud-rain{
                   font-size: 50px;
                 }
               }
+              .daythree:hover{
+                color: #2c1725;
+                background-color: #c6a8a8;
+                transition: 0.4s;
+              }
               .daythree{
+                background-color: #241a27;
+                border-radius: 20px;
                 .fa-cloud-sun{
                   font-size: 50px;
                 }
               }
+              .dayfour:hover{
+                color: #2c1725;
+                background-color: #c6a8a8;
+                transition: 0.4s;
+              }
               .dayfour{
+                background-color: #241a27;
+                border-radius: 20px;
                 .fa-cloud-sun-rain{
                   font-size: 50px;
                 }
@@ -201,7 +270,11 @@
           .place_items{
             text-align: center;
             padding: 40px;
+            
             .place_item{
+              background: #FDC830;  /* fallback for old browsers */
+              background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
               width: 80%;
               height: 40px; 
             }

@@ -9,6 +9,11 @@ import '@fortawesome/fontawesome-free/js/all.js'
 
 Vue.config.productionTip = false
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.prototype.axios = axios;
+Vue.use(VueAxios,axios)
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
