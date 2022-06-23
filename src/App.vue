@@ -93,7 +93,7 @@
         yearMonthDay:'',
         howPlace:'',
         howTemperature:'',
-        howWeather:'???',
+        howWeather:'',
         items:[
           {message:'precipitation',
            messageData:'???',
@@ -147,16 +147,20 @@
       cityApi: function(response){ //顯示地區
         const citys = response.data.records.locations[0].location 
         this.Temperature(citys)
+        this.Weather(citys)
         const city =  citys[7].locationName
-       
         this.howPlace = city 
         // console.log(city)
-        console.log(citys)  
       },
       Temperature: function(citys){
         const temperatures = citys[7].weatherElement[1].time[0].elementValue[0].value
         this.howTemperature = temperatures
         // console.log(temperatures)
+      },
+      Weather: function(citys){
+        const howWeathers = citys[7].weatherElement[6].time[0].elementValue[0].value
+        this.howWeather = howWeathers 
+        console.log(howWeathers)
       },
     },
     
