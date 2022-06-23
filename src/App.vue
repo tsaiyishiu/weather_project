@@ -84,14 +84,15 @@
       this.getApi()
       this.day()
       this.yearmonthday()
+      
       //this.cityApi()
     },
     data() {
       return {
         howDay:'' ,
         yearMonthDay:'',
-        howPlace:'???',
-        howTemperature:'?',
+        howPlace:'',
+        howTemperature:'',
         howWeather:'???',
         items:[
           {message:'precipitation',
@@ -120,7 +121,7 @@
         // Sunday - Saturday : 0 - 6
         this.howDay = this.weekDay[day1]
       },
-      yearmonthday: function() {
+      yearmonthday: function() { //顯示年月日
         const myDate = new Date(); 
         const yearMonThday = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
         // const yearMonThday = `${myDate.getFullYear()} ${this.monthDay[myDate.getMonth()]} ${myDate.getDate()}`
@@ -143,12 +144,19 @@
         } ) 
         
       },
-      cityApi: function(response){
+      cityApi: function(response){ //顯示地區
         const citys = response.data.records.locations[0].location 
+        this.Temperature(citys)
         const city =  citys[7].locationName
+       
         this.howPlace = city 
-        console.log(city)
+        // console.log(city)
         console.log(citys)  
+      },
+      Temperature: function(citys){
+        const temperatures = citys[7].weatherElement[1].time[0].elementValue[0].value
+        this.howTemperature = temperatures
+        // console.log(temperatures)
       },
     },
     
