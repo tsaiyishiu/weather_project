@@ -145,9 +145,9 @@
       },
       cityApi: function(response){
         const citys = response.data.records.locations[0].location 
-        // const city =  citys.filter(city =>{
-        //   city.geocode = 63000020
-        // })
+        const city =  citys[7].locationName
+        this.howPlace = city 
+        console.log(city)
         console.log(citys)  
       },
     },
