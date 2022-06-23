@@ -34,12 +34,14 @@
             </div>
             <div class="forecast_weather">
               <div class="forecast_items d-flex justify-content-center">
-                <div class="dayone d-flex flex-column col-3 justify-content-around">
-                  <i class="fa-solid fa-sun "></i>
-                  <span>Three</span>
-                  <span>29°C</span>
+                <div v-for="(futureitem, index) in futureitems" :key='"futureitem"+index' class="dayone d-flex flex-column col-3 justify-content-around">
+                  <!-- <i class="fa-solid fa-sun "></i> -->
+                  <!-- {{ futureitem.messageIcon }} -->
+                  <div v-html="futureitem.messageIcon"></div>
+                  <span>{{ futureitem.messageWeek }}</span>
+                  <span>{{ futureitem.messageTemperature }}°C</span>
                 </div>
-                <div class="daytwo d-flex flex-column col-3 justify-content-around">
+                <!-- <div class="daytwo d-flex flex-column col-3 justify-content-around">
                   <i class="fa-solid fa-cloud-rain"></i>
                   <span>Four</span>
                   <span>29°C</span>
@@ -53,7 +55,7 @@
                   <i class="fa-solid fa-cloud-sun-rain"></i>
                   <span>Six</span>
                   <span>29°C</span>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="place_items">
@@ -94,6 +96,7 @@
         howPlace:'',
         howTemperature:'',
         howWeather:'',
+        icon:'<i class="fa-solid fa-sun "></i>',
         items:[
           {message:'precipitation',
            messageData:'???',
@@ -107,6 +110,24 @@
            messageData:'???',
            messageunit:'km/h',
           },
+        ],
+        futureitems:[
+          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+           messageWeek:'Three',
+           messageTemperature:'29',
+          },
+          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+           messageWeek:'four',
+           messageTemperature:'223',
+          },
+          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+           messageWeek:'five',
+           messageTemperature:'12',
+          },  
+          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+           messageWeek:'six',
+           messageTemperature:'47',
+          }
         ],
         info : null,
         weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
@@ -160,7 +181,6 @@
       Weather: function(citys){
         const howWeathers = citys[7].weatherElement[6].time[0].elementValue[0].value
         this.howWeather = howWeathers 
-        console.log(howWeathers)
       },
     },
     
