@@ -132,17 +132,49 @@
         info : null,
         weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
+        futureDay: ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'],
         city:[]
       }
     },
     methods: {
-      day: function() {   //顯示星期
+      /**  顯示星期 */
+      day: function() {   
         const birthday = new Date();
         const day1 = birthday.getDay();
+        // const day1 = 6;
+        this.futureday(day1)
         // Sunday - Saturday : 0 - 6
         this.howDay = this.weekDay[day1]
       },
-      yearmonthday: function() { //顯示年月日
+      futureday: function(day1) {
+        // if(this.futureitems[0].messageWeek = this.futureDay[day1 + 3] >= 7){
+        //   -7
+        // }
+        let day2 = day1 +1
+        if(day2 >= 7){
+          day2 = day2 - 7
+        }
+        // console.log(day2)
+        let day3 = day1 +2
+        if(day3 >= 7){
+          day3 = day3 - 7
+        }
+        let day4 = day1 +3
+        if(day4 >= 7){
+          day4 = day4 - 7
+        }
+        let day5 = day1 +4
+        if(day5 >= 7){
+          day5 = day5 - 7
+        }
+        
+        this.futureitems[0].messageWeek = this.futureDay[day2]
+        this.futureitems[1].messageWeek = this.futureDay[day3] 
+        this.futureitems[2].messageWeek = this.futureDay[day4]
+        this.futureitems[3].messageWeek = this.futureDay[day5]
+      },
+      /** 顯示年月日 */
+      yearmonthday: function() { 
         const myDate = new Date(); 
         const yearMonThday = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
         // const yearMonThday = `${myDate.getFullYear()} ${this.monthDay[myDate.getMonth()]} ${myDate.getDate()}`
@@ -165,12 +197,14 @@
         } ) 
         
       },
-      cityApi: function(response){ //顯示地區
+      /** 顯示地區 */
+      cityApi(response){ 
         const citys = response.data.records.locations[0].location 
         this.Temperature(citys)
         this.Weather(citys)
         this.precipitation(citys)
         this.humidity(citys)
+        this.wind(citys)
         const city =  citys[7].locationName
         this.howPlace = city 
         // console.log(city)
@@ -184,16 +218,21 @@
         const howWeathers = citys[7].weatherElement[6].time[0].elementValue[0].value
         this.howWeather = howWeathers 
       },
-      precipitation:function(citys){
+      /** 顯示降雨率 */
+      precipitation:function(citys){ 
         const cipitations = citys[7].weatherElement[0].time[0].elementValue[0].value
-        this.items[0].messageData = cipitations
+        this.items[0].messageData = cipitations + ' '
       },
-      humidity:function(citys){
+      /** 顯示濕度 */
+      humidity:function(citys){ 
         const humiditys = citys[7].weatherElement[2].time[0].elementValue[0].value
-        this.items[1].messageData = humiditys
-        console.log(humiditys)
+        this.items[1].messageData = humiditys+ ' '
       },
-      
+      /** 顯示風速 */
+      wind: function(citys){ 
+        const winds = citys[7].weatherElement[4].time[0].elementValue[0].value
+        this.items[2].messageData = winds * 3600 / 1000 + ' '
+      },
     },
     
   }
