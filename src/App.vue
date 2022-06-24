@@ -169,6 +169,8 @@
         const citys = response.data.records.locations[0].location 
         this.Temperature(citys)
         this.Weather(citys)
+        this.precipitation(citys)
+        this.humidity(citys)
         const city =  citys[7].locationName
         this.howPlace = city 
         // console.log(city)
@@ -176,12 +178,22 @@
       Temperature: function(citys){
         const temperatures = citys[7].weatherElement[1].time[0].elementValue[0].value
         this.howTemperature = temperatures
-        // console.log(temperatures)
+        //console.log(temperatures)
       },
       Weather: function(citys){
         const howWeathers = citys[7].weatherElement[6].time[0].elementValue[0].value
         this.howWeather = howWeathers 
       },
+      precipitation:function(citys){
+        const cipitations = citys[7].weatherElement[0].time[0].elementValue[0].value
+        this.items[0].messageData = cipitations
+      },
+      humidity:function(citys){
+        const humiditys = citys[7].weatherElement[2].time[0].elementValue[0].value
+        this.items[1].messageData = humiditys
+        console.log(humiditys)
+      },
+      
     },
     
   }
