@@ -1,73 +1,76 @@
 <template>
   <div id="app">
-    <div class="main d-flex">
-      <div class="container d-flex align-items-center">
-        <div class="container_under d-flex ">
-          <div class="container_now">
-            <div class="background_city">
-              <div class="Target">
-                <h2 class="worship">{{ howDay }}</h2>  
-                <h3 class="year month day">{{ yearMonthDay }}</h3>
-                <h3 class="Place">{{ howPlace }}</h3>
+    <div>
+      <b-button variant="outline-warning">留言</b-button>
+      <div class="main d-flex">
+        <div class="container d-flex align-items-center">
+          <div class="container_under d-flex ">
+            <div class="container_now">
+              <div class="background_city">
+                <div class="Target">
+                  <h2 class="worship">{{ howDay }}</h2>  
+                  <h3 class="year month day">{{ yearMonthDay }}</h3>
+                  <h3 class="Place">{{ howPlace }}</h3>
+                </div>
+                <div class="current">
+                  <div class="icon" v-html="icon"></div>
+                  <h3 class="temperature">{{ howTemperature }} &#8451;</h3>
+                  <h3 class="weather-desc">{{ howWeather }}</h3>
+                </div> 
               </div>
-              <div class="current">
-                <div class="icon" v-html="icon"></div>
-                <h3 class="temperature">{{ howTemperature }} &#8451;</h3>
-                <h3 class="weather-desc">{{ howWeather }}</h3>
-              </div> 
             </div>
-          </div>
-          <div class="container_future ">
-            <div class="info_current d-flex flex-column">
-              <div v-for="item in items" :key='item.message' class="precipitation">
-                <span>{{ item.message }}</span>
-                <span>{{ item.messageData }}{{ item.messageunit}}</span>
-              </div>
-              <!-- <div class="humidity">
-                <span>humidity</span>
-                <span>34%</span>
-              </div>
-              <div class="wind">
-                <span>wind</span>
-                <span>0 km/h</span>
-              </div> -->
-            </div>
-            <div class="forecast_weather">
-              <div class="forecast_items d-flex justify-content-center">
-                <div v-for="(futureitem, index) in futureitems" :key='"futureitem"+index' class="dayone d-flex flex-column col-3 justify-content-around">
-                  <!-- <i class="fa-solid fa-sun "></i> -->
-                  <!-- {{ futureitem.messageIcon }} -->
-                  <div v-html="futureitem.messageIcon"></div>
-                  <span>{{ futureitem.messageWeek }}</span>
-                  <span>{{ futureitem.messageTemperature }}°C</span>
+            <div class="container_future ">
+              <div class="info_current d-flex flex-column">
+                <div v-for="item in items" :key='item.message' class="precipitation">
+                  <span>{{ item.message }}</span>
+                  <span>{{ item.messageData }}{{ item.messageunit}}</span>
                 </div>
-                <!-- <div class="daytwo d-flex flex-column col-3 justify-content-around">
-                  <i class="fa-solid fa-cloud-rain"></i>
-                  <span>Four</span>
-                  <span>29°C</span>
+                <!-- <div class="humidity">
+                  <span>humidity</span>
+                  <span>34%</span>
                 </div>
-                <div class="daythree d-flex flex-column col-3 justify-content-around">
-                  <i class="fa-solid fa-cloud-sun"></i>
-                  <span>Five</span>
-                  <span>29°C</span>
-                </div>
-                <div class="dayfour d-flex flex-column col-3 justify-content-around">
-                  <i class="fa-solid fa-cloud-sun-rain"></i>
-                  <span>Six</span>
-                  <span>29°C</span>
+                <div class="wind">
+                  <span>wind</span>
+                  <span>0 km/h</span>
                 </div> -->
               </div>
-            </div>
-            <div class="place_items">
-              <button class="place_item">
-                  <i class="fa-solid fa-location-dot"></i>
-                  <span>Change location</span>
-              </button>
-            </div>
-          </div>  
+              <div class="forecast_weather">
+                <div class="forecast_items d-flex justify-content-center">
+                  <div v-for="(futureitem, index) in futureitems" :key='"futureitem"+index' class="dayone d-flex flex-column col-3 justify-content-around">
+                    <!-- <i class="fa-solid fa-sun "></i> -->
+                    <!-- {{ futureitem.messageIcon }} -->
+                    <div v-html="futureitem.messageIcon"></div>
+                    <span>{{ futureitem.messageWeek }}</span>
+                    <span>{{ futureitem.messageTemperature }}°C</span>
+                  </div>
+                  <!-- <div class="daytwo d-flex flex-column col-3 justify-content-around">
+                    <i class="fa-solid fa-cloud-rain"></i>
+                    <span>Four</span>
+                    <span>29°C</span>
+                  </div>
+                  <div class="daythree d-flex flex-column col-3 justify-content-around">
+                    <i class="fa-solid fa-cloud-sun"></i>
+                    <span>Five</span>
+                    <span>29°C</span>
+                  </div>
+                  <div class="dayfour d-flex flex-column col-3 justify-content-around">
+                    <i class="fa-solid fa-cloud-sun-rain"></i>
+                    <span>Six</span>
+                    <span>29°C</span>
+                  </div> -->
+                </div>
+              </div>
+              <div class="place_items">
+                <button class="place_item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Change location</span>
+                </button>
+              </div>
+            </div>  
+          </div>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
 
   <!--
@@ -418,12 +421,15 @@
 </script>
 
 <style lang="scss">
-  #app{
+   #app{
     max-width: 1440px;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     background-color: rgb(61, 50, 57);
     margin: auto;
+    button{
+      margin: 10px;
+    }
     .main{
       height:100vh;
       .container{
@@ -433,9 +439,10 @@
           background-image: url('@/assets/01.jpeg');
           background-repeat:no-repeat;
           background-size: cover;
-          width: 400px;
+          width: 100%;
           /* max-width: 100%; */
           height: 500px;
+          margin-left: 0;
           border-radius: 50px;
           z-index: 2;
           .background_city{
@@ -462,10 +469,10 @@
         }
         .container_future{
         /* max-width: 100%; */
-          width: 500px;
+          width: 100%;
           height: 500px;
           background:#2c1725;
-          border-radius: 0 10% 10% 0;
+          border-radius: 10% 10% 10% 10%;
           //transform: translate(-40px, 0px);
           .info_current{
             padding-left: 40px;
@@ -564,10 +571,327 @@
     }
   }
   .container_under{
-    border-radius: 10%;
+    // border-radius: 10%;
     background-color:#2c1725;
+    flex-direction: column;
+    border-radius: 60px 60px 35px 35px;
+    // background-color:#2c1725;
   }
+@media (min-width: 768px){  
+  #app{
+    max-width: 1440px;
+    width: 100%;
+    // height: 100vh;
+    background-color: rgb(61, 50, 57);
+    margin: auto;
+    button{
+      margin: 10px;
+    }
+    .main{
+      height:100vh;
+      .container{
+      align-items: center;
+      justify-content: center;
+        .container_now{
+          background-image: url('@/assets/01.jpeg');
+          background-repeat:no-repeat;
+          background-size: cover;
+          width: 420px;
+          /* max-width: 100%; */
+          height: 500px;
+          margin-left: 40px;
+          border-radius: 50px;
+          z-index: 2;
+          .background_city{
+            width: 100%;
+            height: 100%;
+            border-radius: 50px;
+            opacity: 0.8;
+            background: #FDC830;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            .Target{
+              padding-left:20px ;
+              padding-top:20px ;
+            }
+            .current{
+              padding-left:20px ;
+              padding-top:160px ;
+              .icon{
+                font-size: 50px;
+                padding-bottom: 10px;
+              }
+            }  
+          }
+        }
+        .container_future{
+        /* max-width: 100%; */
+          width: 500px;
+          height: 500px;
+          background:#2c1725;
+          border-radius: 10% 10% 10% 10%;
+          //transform: translate(-40px, 0px);
+          .info_current{
+            padding-left: 40px;
+            padding-top: 20px;
+            color:#c6a8a8;
+            font-weight: 700;
+            .precipitation span:nth-child(2){
+              float: right;
+              padding-right: 60px;
+            }
+            .humidity span:nth-child(2){
+              float: right;
+              padding-right: 60px;
+            }
+            .wind span:nth-child(2){
+              float: right;
+              padding-right: 60px;
+            }
+          }
+          .forecast_weather{
+            //background: red;
+            margin: 20px 40px 0px 40px;
+            height: 250px;
+            .forecast_items{
+              //padding: 40px 0px 40px 0px;
+              color: #f18a45;
+              background-color:#241a27;
+              height: 100%;
+              text-align: center;
+              font-size: 30px;
+
+              .dayone:hover{
+                color: #2c1725;
+                background-color:#c6a8a8;
+                transition: 0.4s;
+              }
+              .dayone{
+                background-color:#241a27;
+                border-radius: 20px;
+                .fa-sun{
+                  // font-size: 50px;
+                }
+              }
+              .daytwo:hover{
+                color: #2c1725;
+                background-color: #c6a8a8;
+                transition: 0.4s;
+              }
+              .daytwo{
+                background-color: #241a27;
+                border-radius: 20px;
+                .fa-cloud-rain{
+                  // font-size: 50px;
+                }
+              }
+              .daythree:hover{
+                color: #2c1725;
+                background-color: #c6a8a8;
+                transition: 0.4s;
+              }
+              .daythree{
+                background-color: #241a27;
+                border-radius: 20px;
+                .fa-cloud-sun{
+                  // font-size: 50px;
+                }
+              }
+              .dayfour:hover{
+                color: #2c1725;
+                background-color: #c6a8a8;
+                transition: 0.4s;
+              }
+              .dayfour{
+                background-color: #241a27;
+                border-radius: 20px;
+                .fa-cloud-sun-rain{
+                  // font-size: 50px;
+                }
+              }
+            }
+          }
+          .place_items{
+            text-align: center;
+            padding: 40px;
+            
+            .place_item{
+              background: #FDC830;  /* fallback for old browsers */
+              background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+              width: 80%;
+              height: 40px; 
+            }
+          }
+        }
+      }
+    }
+  }
+  .container_under{
+    // border-radius: 10%;
+    background-color:#2c1725;
+    flex-direction: column;
+    border-radius: 35px;
+    // background-color:#2c1725;
+  }
+}  
   
+@media (min-width: 1024px){  
+    #app{
+      max-width: 1440px;
+      width: 100%;
+      // height: 100vh;
+      background-color: rgb(61, 50, 57);
+      margin: auto;
+      button{
+        margin: 10px;
+      }
+      .main{
+        height:100vh;
+        .container{
+        align-items: center;
+        justify-content: center;
+          .container_now{
+            background-image: url('@/assets/01.jpeg');
+            background-repeat:no-repeat;
+            background-size: cover;
+            width: 400px;
+            /* max-width: 100%; */
+            height: 500px;
+            margin-left: 0px;
+            border-radius: 50px;
+            z-index: 2;
+            .background_city{
+              width: 100%;
+              height: 100%;
+              border-radius: 50px;
+              opacity: 0.8;
+              background: #FDC830;  /* fallback for old browsers */
+              background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+              background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+              .Target{
+                padding-left:20px ;
+                padding-top:20px ;
+              }
+              .current{
+                padding-left:20px ;
+                padding-top:160px ;
+                .icon{
+                  font-size: 50px;
+                  padding-bottom: 10px;
+                }
+              }  
+            }
+          }
+          .container_future{
+          /* max-width: 100%; */
+            width: 500px;
+            height: 500px;
+            background:#2c1725;
+            border-radius: 0 10% 10% 0;
+            //transform: translate(-40px, 0px);
+            .info_current{
+              padding-left: 40px;
+              padding-top: 20px;
+              color:#c6a8a8;
+              font-weight: 700;
+              .precipitation span:nth-child(2){
+                float: right;
+                padding-right: 60px;
+              }
+              .humidity span:nth-child(2){
+                float: right;
+                padding-right: 60px;
+              }
+              .wind span:nth-child(2){
+                float: right;
+                padding-right: 60px;
+              }
+            }
+            .forecast_weather{
+              //background: red;
+              margin: 20px 40px 0px 40px;
+              height: 250px;
+              .forecast_items{
+                //padding: 40px 0px 40px 0px;
+                color: #f18a45;
+                background-color:#241a27;
+                height: 100%;
+                text-align: center;
+                font-size: 30px;
+
+                .dayone:hover{
+                  color: #2c1725;
+                  background-color:#c6a8a8;
+                  transition: 0.4s;
+                }
+                .dayone{
+                  background-color:#241a27;
+                  border-radius: 20px;
+                  .fa-sun{
+                    // font-size: 50px;
+                  }
+                }
+                .daytwo:hover{
+                  color: #2c1725;
+                  background-color: #c6a8a8;
+                  transition: 0.4s;
+                }
+                .daytwo{
+                  background-color: #241a27;
+                  border-radius: 20px;
+                  .fa-cloud-rain{
+                    // font-size: 50px;
+                  }
+                }
+                .daythree:hover{
+                  color: #2c1725;
+                  background-color: #c6a8a8;
+                  transition: 0.4s;
+                }
+                .daythree{
+                  background-color: #241a27;
+                  border-radius: 20px;
+                  .fa-cloud-sun{
+                    // font-size: 50px;
+                  }
+                }
+                .dayfour:hover{
+                  color: #2c1725;
+                  background-color: #c6a8a8;
+                  transition: 0.4s;
+                }
+                .dayfour{
+                  background-color: #241a27;
+                  border-radius: 20px;
+                  .fa-cloud-sun-rain{
+                    // font-size: 50px;
+                  }
+                }
+              }
+            }
+            .place_items{
+              text-align: center;
+              padding: 40px;
+              
+              .place_item{
+                background: #FDC830;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                width: 80%;
+                height: 40px; 
+              }
+            }
+          }
+        }
+      }
+    }
+    .container_under{
+      border-radius: 10%;
+      background-color:#2c1725;
+      flex-direction: row
+    }
+}
   
   
   
