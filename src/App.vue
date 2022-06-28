@@ -11,7 +11,7 @@
                 <h3 class="Place">{{ howPlace }}</h3>
               </div>
               <div class="current">
-                <i class="fa-solid fa-sun"></i>
+                <div class="icon" v-html="icon"></div>
                 <h3 class="temperature">{{ howTemperature }} &#8451;</h3>
                 <h3 class="weather-desc">{{ howWeather }}</h3>
               </div> 
@@ -101,7 +101,7 @@
         howPlace:'',
         howTemperature:'',
         howWeather:'',
-        icon:'<i class="fa-solid fa-sun "></i>',
+        icon:'',
         items:[
           {message:'precipitation',
            messageData:'???',
@@ -121,15 +121,15 @@
            messageWeek:'Three',
            messageTemperature:'29',
           },
-          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+          {messageIcon:'',
            messageWeek:'four',
            messageTemperature:'223',
           },
-          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+          {messageIcon:'',
            messageWeek:'five',
            messageTemperature:'12',
           },  
-          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+          {messageIcon:'',
            messageWeek:'six',
            messageTemperature:'47',
           }
@@ -217,6 +217,7 @@
         this.wind(citys)
         this.futureTemperature(citys)
         this.futureIcon(citys)
+        this.weatherIcon(citys)
         const city =  citys[7].locationName
         this.howPlace = city 
         // console.log(city)
@@ -226,6 +227,36 @@
         const temperatures = citys[7].weatherElement[1].time[0].elementValue[0].value
         this.howTemperature = temperatures
         //console.log(temperatures)
+      },
+      /** 顯示天氣圖示 */
+      weatherIcon:function(citys){
+        for (let index = 0; index < 4; index++) {
+          let weatherIcons = Number(citys[7].weatherElement[6].time[0].elementValue[1].value)  
+
+          if (weatherIcons <= 4){
+            
+            weatherIcons = '<i class="fa-solid fa-sun "></i>'
+          }
+          if( 7 >= weatherIcons && weatherIcons >= 5 ){
+            
+            weatherIcons = '<i class="fa-solid fa-cloud"></i>'
+          }
+          if(23 >= weatherIcons && weatherIcons >= 8){
+            
+            weatherIcons = '<i class="fa-solid fa-cloud-rain"></i> '
+            
+          }
+          if(27 >= weatherIcons && weatherIcons >= 24){
+            weatherIcons = '<i class="fa-solid fa-sun "></i>'
+          }
+          if( weatherIcons === 28){
+            weatherIcons = '<i class="fa-solid fa-cloud"></i>'
+          }
+          if( 41 >= weatherIcons && weatherIcons >= 29){
+            weatherIcons = '<i class="fa-solid fa-cloud-rain"></i> '
+          }
+          this.icon = weatherIcons
+        }
       },
       /** 顯示天氣 */
       Weather: function(citys){
@@ -352,30 +383,30 @@
         // this.futureitems[3].messageIcon = futureIconFour
         for (let index = 0; index < 4; index++) {
           let futureIconOne = Number(citys[7].weatherElement[6].time[(index+1)*2].elementValue[1].value)
-          console.log(futureIconOne)
-        
+
           if (futureIconOne <= 4){
             
             futureIconOne = '<i class="fa-solid fa-sun "></i>'
           }
-          if( 7 >= futureIconOne >= 5 ){
+          if( 7 >= futureIconOne && futureIconOne >= 5 ){
+            
             futureIconOne = '<i class="fa-solid fa-cloud"></i>'
           }
-          if(23 >= futureIconOne >= 8){
-            
+          if(23 >= futureIconOne && futureIconOne >= 8){
+            console.log(123)
             futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+            
           }
-          if(27 >= futureIconOne >= 24){
+          if(27 >= futureIconOne && futureIconOne >= 24){
             futureIconOne = '<i class="fa-solid fa-sun "></i>'
           }
           if( futureIconOne === 28){
             futureIconOne = '<i class="fa-solid fa-cloud"></i>'
           }
-          if( 41 >= futureIconOne >= 29){
+          if( 41 >= futureIconOne && futureIconOne >= 29){
             futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
           }
           this.futureitems[index].messageIcon = futureIconOne
-
         }
       },
     },
@@ -422,7 +453,7 @@
             .current{
               padding-left:20px ;
               padding-top:160px ;
-              .fa-sun{
+              .icon{
                 font-size: 50px;
                 padding-bottom: 10px;
               }
@@ -475,7 +506,7 @@
                 background-color:#241a27;
                 border-radius: 20px;
                 .fa-sun{
-                  font-size: 50px;
+                  // font-size: 50px;
                 }
               }
               .daytwo:hover{
@@ -487,7 +518,7 @@
                 background-color: #241a27;
                 border-radius: 20px;
                 .fa-cloud-rain{
-                  font-size: 50px;
+                  // font-size: 50px;
                 }
               }
               .daythree:hover{
@@ -499,7 +530,7 @@
                 background-color: #241a27;
                 border-radius: 20px;
                 .fa-cloud-sun{
-                  font-size: 50px;
+                  // font-size: 50px;
                 }
               }
               .dayfour:hover{
@@ -511,7 +542,7 @@
                 background-color: #241a27;
                 border-radius: 20px;
                 .fa-cloud-sun-rain{
-                  font-size: 50px;
+                  // font-size: 50px;
                 }
               }
             }
