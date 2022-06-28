@@ -76,7 +76,12 @@
     3.副頁欄位 輸入名字電話信箱地址 送入localstrogi
     看30天接api
     授權碼：CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821
-    
+
+    <i class="fa-solid fa-location-dot"></i> 太陽
+    <i class="fa-solid fa-cloud-rain"></i> 下雨
+    <i class="fa-solid fa-cloud"></i> 雲
+    <i class="fa-solid fa-cloud-sun-rain"></i> 太陽雨
+    10 > a > 3
    -->
 </template>
 
@@ -112,7 +117,7 @@
           },
         ],
         futureitems:[
-          {messageIcon:'<i class="fa-solid fa-sun "></i>',
+          {messageIcon:'',
            messageWeek:'Three',
            messageTemperature:'29',
           },
@@ -146,32 +151,37 @@
         // Sunday - Saturday : 0 - 6
         this.howDay = this.weekDay[day1]
       },
+      /** 顯示未來星期 */
       futureday: function(day1) {
-        // if(this.futureitems[0].messageWeek = this.futureDay[day1 + 3] >= 7){
-        //   -7
+        // let day2 = day1 +1
+        // if(day2 >= 7){
+        //   day2 = day2 - 7
         // }
-        let day2 = day1 +1
-        if(day2 >= 7){
-          day2 = day2 - 7
+        // let day3 = day1 +2
+        // if(day3 >= 7){
+        //   day3 = day3 - 7
+        // }
+        // let day4 = day1 +3
+        // if(day4 >= 7){
+        //   day4 = day4 - 7
+        // }
+        // let day5 = day1 +4
+        // if(day5 >= 7){
+        //   day5 = day5 - 7
+        // }
+        // this.futureitems[0].messageWeek = this.futureDay[day2]
+        // this.futureitems[1].messageWeek = this.futureDay[day3] 
+        // this.futureitems[2].messageWeek = this.futureDay[day4]
+        // this.futureitems[3].messageWeek = this.futureDay[day5]
+
+
+        for (let index = 0; index < 4; index++) {
+          let newDay = day1 + (index+1)
+          if(newDay >= 7){
+            newDay = newDay - 7
+          }
+          this.futureitems[index].messageWeek = this.futureDay[newDay]
         }
-        // console.log(day2)
-        let day3 = day1 +2
-        if(day3 >= 7){
-          day3 = day3 - 7
-        }
-        let day4 = day1 +3
-        if(day4 >= 7){
-          day4 = day4 - 7
-        }
-        let day5 = day1 +4
-        if(day5 >= 7){
-          day5 = day5 - 7
-        }
-        
-        this.futureitems[0].messageWeek = this.futureDay[day2]
-        this.futureitems[1].messageWeek = this.futureDay[day3] 
-        this.futureitems[2].messageWeek = this.futureDay[day4]
-        this.futureitems[3].messageWeek = this.futureDay[day5]
       },
       /** 顯示年月日 */
       yearmonthday: function() { 
@@ -205,15 +215,19 @@
         this.precipitation(citys)
         this.humidity(citys)
         this.wind(citys)
+        this.futureTemperature(citys)
+        this.futureIcon(citys)
         const city =  citys[7].locationName
         this.howPlace = city 
         // console.log(city)
       },
+      /** 顯示溫度 */
       Temperature: function(citys){
         const temperatures = citys[7].weatherElement[1].time[0].elementValue[0].value
         this.howTemperature = temperatures
         //console.log(temperatures)
       },
+      /** 顯示天氣 */
       Weather: function(citys){
         const howWeathers = citys[7].weatherElement[6].time[0].elementValue[0].value
         this.howWeather = howWeathers 
@@ -232,6 +246,137 @@
       wind: function(citys){ 
         const winds = citys[7].weatherElement[4].time[0].elementValue[0].value
         this.items[2].messageData = winds * 3600 / 1000 + ' '
+      },
+      /**顯示未來溫度 */
+      futureTemperature:function(citys){
+        const futureTemperaturesOne = citys[7].weatherElement[1].time[2].elementValue[0].value
+        const futureTemperaturesTwo = citys[7].weatherElement[1].time[4].elementValue[0].value
+        const futureTemperaturesThree = citys[7].weatherElement[1].time[6].elementValue[0].value
+        const futureTemperaturesFour = citys[7].weatherElement[1].time[8].elementValue[0].value
+        this.futureitems[0].messageTemperature = futureTemperaturesOne
+        this.futureitems[1].messageTemperature = futureTemperaturesTwo
+        this.futureitems[2].messageTemperature = futureTemperaturesThree
+        this.futureitems[3].messageTemperature = futureTemperaturesFour
+        // console.log(futureTemperaturesOne)
+      },
+      futureIcon:function(citys){
+        // let futureIconOne = Number(citys[7].weatherElement[6].time[2].elementValue[1].value)
+        // console.log(futureIconOne)
+        
+        // if (futureIconOne <= 4){
+          
+        //   futureIconOne = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( 7 >= futureIconOne >= 5 ){
+        //   futureIconOne = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if(23 >= futureIconOne >= 8){
+          
+        //   futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // if(27 >= futureIconOne >= 24){
+        //   futureIconOne = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( futureIconOne === 28){
+        //   futureIconOne = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if( 41 >= futureIconOne >= 29){
+        //   futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // this.futureitems[0].messageIcon = futureIconOne
+        // let futureIconTwo = Number(citys[7].weatherElement[6].time[4].elementValue[1].value)
+        // if (futureIconTwo <= 4){
+          
+        //   futureIconTwo = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( 7 >= futureIconTwo >= 5 ){
+        //   futureIconTwo = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if(23 >= futureIconTwo >= 8){
+          
+        //   futureIconTwo = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // if(27 >= futureIconTwo >= 24){
+        //   futureIconTwo = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( futureIconTwo === 28){
+        //   futureIconTwo = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if( 41 >= futureIconTwo >= 29){
+        //   futureIconTwo = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // this.futureitems[1].messageIcon = futureIconTwo
+        // let futureIconThree = Number(citys[7].weatherElement[6].time[6].elementValue[1].value)
+        // if (futureIconThree <= 4){
+          
+        //   futureIconThree = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( 7 >= futureIconThree >= 5 ){
+        //   futureIconThree = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if(23 >= futureIconThree >= 8){
+          
+        //   futureIconThree = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // if(27 >= futureIconThree >= 24){
+        //   futureIconThree = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( futureIconThree === 28){
+        //   futureIconThree = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if( 41 >= futureIconThree >= 29){
+        //   futureIconThree = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // this.futureitems[2].messageIcon = futureIconThree
+        // let futureIconFour = Number(citys[7].weatherElement[6].time[8].elementValue[1].value)
+        // if (futureIconFour <= 4){
+          
+        //   futureIconFour = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( 7 >= futureIconFour >= 5 ){
+        //   futureIconFour = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if(23 >= futureIconFour >= 8){
+          
+        //   futureIconFour = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // if(27 >= futureIconFour >= 24){
+        //   futureIconFour = '<i class="fa-solid fa-sun "></i>'
+        // }
+        // if( futureIconFour === 28){
+        //   futureIconFour = '<i class="fa-solid fa-cloud"></i>'
+        // }
+        // if( 41 >= futureIconFour >= 29){
+        //   futureIconFour = '<i class="fa-solid fa-cloud-rain"></i> '
+        // }
+        // this.futureitems[3].messageIcon = futureIconFour
+        for (let index = 0; index < 4; index++) {
+          let futureIconOne = Number(citys[7].weatherElement[6].time[(index+1)*2].elementValue[1].value)
+          console.log(futureIconOne)
+        
+          if (futureIconOne <= 4){
+            
+            futureIconOne = '<i class="fa-solid fa-sun "></i>'
+          }
+          if( 7 >= futureIconOne >= 5 ){
+            futureIconOne = '<i class="fa-solid fa-cloud"></i>'
+          }
+          if(23 >= futureIconOne >= 8){
+            
+            futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+          }
+          if(27 >= futureIconOne >= 24){
+            futureIconOne = '<i class="fa-solid fa-sun "></i>'
+          }
+          if( futureIconOne === 28){
+            futureIconOne = '<i class="fa-solid fa-cloud"></i>'
+          }
+          if( 41 >= futureIconOne >= 29){
+            futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+          }
+          this.futureitems[index].messageIcon = futureIconOne
+
+        }
       },
     },
     
