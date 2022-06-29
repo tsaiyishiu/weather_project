@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app">    
     <div>
       <b-button variant="outline-warning">留言</b-button>
       <div class="main d-flex">
@@ -9,8 +9,8 @@
               <div class="background_city">
                 <div class="Target">
                   <h2 class="worship">{{ howDay }}</h2>  
-                  <h3 class="year month day">{{ yearMonthDay }}</h3>
-                  <h3 class="Place">{{ howPlace }}</h3>
+                  <h3 class="year_month_day">{{ yearMonthDay }}</h3>
+                  <h3 class="place">{{ howPlace }}</h3>
                 </div>
                 <div class="current">
                   <div class="icon" v-html="icon"></div>
@@ -28,7 +28,10 @@
               </div>
               <div class="forecast_weather">
                 <div class="forecast_items d-flex justify-content-center">
-                  <div v-for="(futureitem, index) in futureitems" :key='"futureitem"+index' class="dayone d-flex flex-column col-3 justify-content-around">
+                  <div
+                    v-for="(futureitem, index) in futureitems" :key='"futureitem"+index'
+                    class="dayone d-flex flex-column col-3 justify-content-around"
+                  >
                     <div v-html="futureitem.messageIcon"></div>
                     <span>{{ futureitem.messageWeek }}</span>
                     <span>{{ futureitem.messageTemperature }}°C</span>
@@ -47,6 +50,7 @@
       </div>
     </div>  
   </div>
+  
 
   <!--
     1.分頁 轉換頁面 路由器router （vue router後續）
@@ -223,12 +227,12 @@
         this.howWeather = howWeathers 
       },
       /** 顯示降雨率 */
-      precipitation:function(citys){ 
+      precipitation: function(citys){ 
         const cipitations = citys[7].weatherElement[0].time[0].elementValue[0].value
         this.items[0].messageData = cipitations + ' '
       },
       /** 顯示濕度 */
-      humidity:function(citys){ 
+      humidity: function(citys){ 
         const humiditys = citys[7].weatherElement[2].time[0].elementValue[0].value
         this.items[1].messageData = humiditys+ ' '
       },
