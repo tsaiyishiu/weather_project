@@ -14,6 +14,12 @@ import VueAxios from 'vue-axios'
 Vue.prototype.axios = axios;
 Vue.use(VueAxios,axios)
 
+import "./components/index";
+// import HelloWorld from "./components/HelloWorld";
+// import LoremText from "./components/LoremText";
+// Vue.component('HelloWorld',HelloWorld)
+// Vue.component('LoremText',LoremText)
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
