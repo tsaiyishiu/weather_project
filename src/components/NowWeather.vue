@@ -27,6 +27,7 @@ export default {
       this.showWeather(apiCity)
       this.showWeatherIcon(apiCity)
     },
+    
   },
   mounted(){
     this.showWeek()
@@ -42,6 +43,7 @@ export default {
       icon:'',
       weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
       monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
+      
     }
   },
   methods: {
@@ -51,12 +53,13 @@ export default {
       const day1 = birthday.getDay();
       // this.showFutureWeek(day1)
       this.howDay = this.weekDay[day1]
+      
     },
     /** 顯示年月日 */
     showYearMonthDays: function() { 
       const myDate = new Date();       
       const yearMonthDay = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
-      console.log(yearMonthDay)
+      
       this.yearMonthDay = yearMonthDay
     },
     /** 顯示地區 */

@@ -1,57 +1,57 @@
 <template>
-  <div id="app">    
+  <div id="app">
     <b-button variant="outline-warning">留言</b-button>
-    <div class="main d-flex">
-      <!-- <h1>天氣預報</h1> -->
-      <div class="container d-flex align-items-center">
-        <div class="container_under d-flex ">
-
-          <NowWeather :api='api'></NowWeather>
-          <!-- <div class="container_now">
-            <div class="background_city">
-              <div class="Target">
-                <h2 class="worship">{{ howDay }}</h2>  
-                <h3 class="year_month_day">{{ yearMonthDay }}</h3>
-                <h3 class="place">{{ howPlace }}</h3>
+    <div class="d-flex justify-content-center h-100">      
+      <div class="main d-flex">
+        <!-- <h1>天氣預報</h1> -->
+        <div class="container d-flex align-items-center">
+          <div class="container_under d-flex ">
+            <NowWeather :api='api'></NowWeather>
+            <!-- <div class="container_now">
+              <div class="background_city">
+                <div class="Target">
+                  <h2 class="worship">{{ howDay }}</h2>  
+                  <h3 class="year_month_day">{{ yearMonthDay }}</h3>
+                  <h3 class="place">{{ howPlace }}</h3>
+                </div>
+                <div class="current">
+                  <div class="icon" v-html="icon"></div>
+                  <h3 class="temperature">{{ howTemperature }} &#8451;</h3>
+                  <h3 class="weather-desc">{{ howWeather }}</h3>
+                </div> 
               </div>
-              <div class="current">
-                <div class="icon" v-html="icon"></div>
-                <h3 class="temperature">{{ howTemperature }} &#8451;</h3>
-                <h3 class="weather-desc">{{ howWeather }}</h3>
-              </div> 
-            </div>
-          </div> -->
-
-
-          <div class="container_future ">
-            <div class="info_current d-flex flex-column">
-              <div v-for="(item, index) in weatherInformation" :key='"item"+index' class="precipitation">
-                <span>{{ item.message }}</span>
-                <span>{{ item.messageData }}{{ item.messageunit}}</span>
-              </div>
-            </div>
-            <div class="forecast_weather">
-              <div class="forecast_items d-flex justify-content-center">
-                <div
-                  v-for="(futureitem, index) in futureDays" :key='"futureitem"+index'
-                  class="dayone d-flex flex-column col-3 justify-content-around"
-                >
-                  <div v-html="futureitem.messageIcon"></div>
-                  <span>{{ futureitem.messageWeek }}</span>
-                  <span>{{ futureitem.messageTemperature }}°C</span>
+            </div> -->
+            <FutureWeather :api='api' :today='todaytoday'></FutureWeather>
+            <!-- <div class="container_future ">
+              <div class="info_current d-flex flex-column">
+                <div v-for="(item, index) in weatherInformation" :key='"item"+index' class="precipitation">
+                  <span>{{ item.message }}</span>
+                  <span>{{ item.messageData }}{{ item.messageunit}}</span>
                 </div>
               </div>
-            </div>
-            <div class="place_items">
-              <button class="place_item">
-                  <i class="fa-solid fa-location-dot"></i>
-                  <span>Change location</span>
-              </button>
-            </div>
-          </div>  
+              <div class="forecast_weather">
+                <div class="forecast_items d-flex justify-content-center">
+                  <div
+                    v-for="(futureitem, index) in futureDays" :key='"futureitem"+index'
+                    class="dayone d-flex flex-column col-3 justify-content-around"
+                  >
+                    <div v-html="futureitem.messageIcon"></div>
+                    <span>{{ futureitem.messageWeek }}</span>
+                    <span>{{ futureitem.messageTemperature }}°C</span>
+                  </div>
+                </div>
+              </div>
+              <div class="place_items">
+                <button class="place_item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Change location</span>
+                </button>
+              </div>
+            </div>   -->
+          </div>
         </div>
       </div>
-    </div>
+    </div> 
   </div>
   
 
@@ -72,8 +72,9 @@
   export default {
     mounted(){
       this.getApi()
-      this.showWeek()
-      this.showYearMonthDays()
+      this.today()
+      // this.showWeek()
+      // this.showYearMonthDays()
     },
     data() {
       return {
@@ -122,19 +123,26 @@
         cites:[],
         api:{
           messageApi:'',
-        }
+        },
+        todaytoday:'',
       }
     },
     methods: {
       /**  顯示星期 */
-      showWeek: function() {         
-      const birthday = new Date();
-      const day1 = birthday.getDay();
-      this.showFutureWeek(day1)
-      this.howDay = this.weekDay[day1]
+      // showWeek: function() {         
+      // const birthday = new Date();
+      // const day1 = birthday.getDay();
+      // this.showFutureWeek(day1)
+      // this.howDay = this.weekDay[day1]
+      // },
+      today: function(){
+        const NewToday = new Date()
+        const day1 = NewToday.getDay()
+        // this.showFutureWeek(day1)
+        this.todaytoday = day1
       },
       /** 顯示未來星期 */
-      showFutureWeek: function(day1) {
+      // showFutureWeek: function(day1) {
         // let day2 = day1 +1
         // if(day2 >= 7){
         //   day2 = day2 - 7
@@ -155,20 +163,20 @@
         // this.futureDays[1].messageWeek = this.weekAbbreviation[day3] 
         // this.futureDays[2].messageWeek = this.weekAbbreviation[day4]
         // this.futureDays[3].messageWeek = this.weekAbbreviation[day5]
-        for (let index = 0; index < 4; index++) {
-          let newDay = day1 + (index+1)
-          if(newDay >= 7){
-            newDay = newDay - 7
-          }
-          this.futureDays[index].messageWeek = this.weekAbbreviation[newDay]
-        }
-      },
+      //   for (let index = 0; index < 4; index++) {
+      //     let newDay = day1 + (index+1)
+      //     if(newDay >= 7){
+      //       newDay = newDay - 7
+      //     }
+      //     this.futureDays[index].messageWeek = this.weekAbbreviation[newDay]
+      //   }
+      // },
       /** 顯示年月日 */
-      showYearMonthDays: function() { 
-        const myDate = new Date(); 
-        const yearMonthDay = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
-        this.yearMonthDay = yearMonthDay
-      },
+      // showYearMonthDays: function() { 
+      //   const myDate = new Date(); 
+      //   const yearMonthDay = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
+      //   this.yearMonthDay = yearMonthDay
+      // },
       getApi: function() {
         this.axios
         .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821&locationId=F-D0047-063' ) 
@@ -189,12 +197,12 @@
         this.api = city
         // this.showTemperature(city)
         // this.showWeather(city)
-        this.showPrecipitation(city)
-        this.showHumidity(city)
-        this.showWind(city)
-        this.showFutureTemperature(city)
-        this.showFutureIcon(city)
-        this.showWeatherIcon(city)
+        // this.showPrecipitation(city)
+        // this.showHumidity(city)
+        // this.showWind(city)
+        // this.showFutureTemperature(city)
+        // this.showFutureIcon(city)
+        // this.showWeatherIcon(city)
         const cites = city[7].locationName
         this.howPlace = cites
       },
@@ -205,63 +213,63 @@
       //   //console.log(temperatures)
       // },
       /** 顯示天氣圖示 */
-      showWeatherIcon: function(city){
-        for (let index = 0; index < 4; index++) {
-          let weatherIcons = Number(city[7].weatherElement[6].time[0].elementValue[1].value)  
-          if (weatherIcons <= 4){
-            weatherIcons = '<i class="fa-solid fa-sun "></i>'
-          }
-          if( 7 >= weatherIcons && weatherIcons >= 5 ){
-            weatherIcons = '<i class="fa-solid fa-cloud"></i>'
-          }
-          if(23 >= weatherIcons && weatherIcons >= 8){
-            weatherIcons = '<i class="fa-solid fa-cloud-rain"></i> '
-          }
-          if(27 >= weatherIcons && weatherIcons >= 24){
-            weatherIcons = '<i class="fa-solid fa-sun "></i>'
-          }
-          if( weatherIcons === 28){
-            weatherIcons = '<i class="fa-solid fa-cloud"></i>'
-          }
-          if( 41 >= weatherIcons && weatherIcons >= 29){
-            weatherIcons = '<i class="fa-solid fa-cloud-rain"></i> '
-          }
-          this.icon = weatherIcons
-        }
-      },
+      // showWeatherIcon: function(city){
+      //   for (let index = 0; index < 4; index++) {
+      //     let weatherIcons = Number(city[7].weatherElement[6].time[0].elementValue[1].value)  
+      //     if (weatherIcons <= 4){
+      //       weatherIcons = '<i class="fa-solid fa-sun "></i>'
+      //     }
+      //     if( 7 >= weatherIcons && weatherIcons >= 5 ){
+      //       weatherIcons = '<i class="fa-solid fa-cloud"></i>'
+      //     }
+      //     if(23 >= weatherIcons && weatherIcons >= 8){
+      //       weatherIcons = '<i class="fa-solid fa-cloud-rain"></i> '
+      //     }
+      //     if(27 >= weatherIcons && weatherIcons >= 24){
+      //       weatherIcons = '<i class="fa-solid fa-sun "></i>'
+      //     }
+      //     if( weatherIcons === 28){
+      //       weatherIcons = '<i class="fa-solid fa-cloud"></i>'
+      //     }
+      //     if( 41 >= weatherIcons && weatherIcons >= 29){
+      //       weatherIcons = '<i class="fa-solid fa-cloud-rain"></i> '
+      //     }
+      //     this.icon = weatherIcons
+      //   }
+      // },
       /** 顯示天氣 */
       // showWeather: function(city){
       //   const howWeathers = city[7].weatherElement[6].time[0].elementValue[0].value
       //   this.howWeather = howWeathers 
       // },
       /** 顯示降雨率 */
-      showPrecipitation: function(city){ 
-        const cipitations = city[7].weatherElement[0].time[0].elementValue[0].value
-        this.weatherInformation[0].messageData = cipitations + ' '
-      },
+      // showPrecipitation: function(city){ 
+      //   const cipitations = city[7].weatherElement[0].time[0].elementValue[0].value
+      //   this.weatherInformation[0].messageData = cipitations + ' '
+      // },
       /** 顯示濕度 */
-      showHumidity: function(city){ 
-        const humiditys = city[7].weatherElement[2].time[0].elementValue[0].value
-        this.weatherInformation[1].messageData = humiditys+ ' '
-      },
+      // showHumidity: function(city){ 
+      //   const humiditys = city[7].weatherElement[2].time[0].elementValue[0].value
+      //   this.weatherInformation[1].messageData = humiditys+ ' '
+      // },
       /** 顯示風速 */
-      showWind: function(city){ 
-        const winds = city[7].weatherElement[4].time[0].elementValue[0].value
-        this.weatherInformation[2].messageData = winds * 3600 / 1000 + ' '
-      },
+      // showWind: function(city){ 
+      //   const winds = city[7].weatherElement[4].time[0].elementValue[0].value
+      //   this.weatherInformation[2].messageData = winds * 3600 / 1000 + ' '
+      // },
       /**顯示未來溫度 */
-      showFutureTemperature: function(city){
-        const futureTemperaturesOne = city[7].weatherElement[1].time[2].elementValue[0].value
-        const futureTemperaturesTwo = city[7].weatherElement[1].time[4].elementValue[0].value
-        const futureTemperaturesThree = city[7].weatherElement[1].time[6].elementValue[0].value
-        const futureTemperaturesFour = city[7].weatherElement[1].time[8].elementValue[0].value
-        this.futureDays[0].messageTemperature = futureTemperaturesOne
-        this.futureDays[1].messageTemperature = futureTemperaturesTwo
-        this.futureDays[2].messageTemperature = futureTemperaturesThree
-        this.futureDays[3].messageTemperature = futureTemperaturesFour
-      },
+      // showFutureTemperature: function(city){
+      //   const futureTemperaturesOne = city[7].weatherElement[1].time[2].elementValue[0].value
+      //   const futureTemperaturesTwo = city[7].weatherElement[1].time[4].elementValue[0].value
+      //   const futureTemperaturesThree = city[7].weatherElement[1].time[6].elementValue[0].value
+      //   const futureTemperaturesFour = city[7].weatherElement[1].time[8].elementValue[0].value
+      //   this.futureDays[0].messageTemperature = futureTemperaturesOne
+      //   this.futureDays[1].messageTemperature = futureTemperaturesTwo
+      //   this.futureDays[2].messageTemperature = futureTemperaturesThree
+      //   this.futureDays[3].messageTemperature = futureTemperaturesFour
+      // },
       /** 顯示未來天氣圖示 */
-      showFutureIcon: function(city){
+      // showFutureIcon: function(city){
         // let futureIconOne = Number(city[7].weatherElement[6].time[2].elementValue[1].value)
         // console.log(futureIconOne)
         
@@ -352,29 +360,29 @@
         //   futureIconFour = '<i class="fa-solid fa-cloud-rain"></i> '
         // }
         // this.futureDays[3].messageIcon = futureIconFour
-        for (let index = 0; index < 4; index++) {
-          let futureIconOne = Number(city[7].weatherElement[6].time[(index+1)*2].elementValue[1].value)
-          if (futureIconOne <= 4){
-            futureIconOne = '<i class="fa-solid fa-sun "></i>'
-          }
-          if( 7 >= futureIconOne && futureIconOne >= 5 ){
-            futureIconOne = '<i class="fa-solid fa-cloud"></i>'
-          }
-          if(23 >= futureIconOne && futureIconOne >= 8){      
-            futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
-          }
-          if(27 >= futureIconOne && futureIconOne >= 24){
-            futureIconOne = '<i class="fa-solid fa-sun "></i>'
-          }
-          if( futureIconOne === 28){
-            futureIconOne = '<i class="fa-solid fa-cloud"></i>'
-          }
-          if( 41 >= futureIconOne && futureIconOne >= 29){
-            futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
-          }
-          this.futureDays[index].messageIcon = futureIconOne
-        }
-      },
+      //   for (let index = 0; index < 4; index++) {
+      //     let futureIconOne = Number(city[7].weatherElement[6].time[(index+1)*2].elementValue[1].value)
+      //     if (futureIconOne <= 4){
+      //       futureIconOne = '<i class="fa-solid fa-sun "></i>'
+      //     }
+      //     if( 7 >= futureIconOne && futureIconOne >= 5 ){
+      //       futureIconOne = '<i class="fa-solid fa-cloud"></i>'
+      //     }
+      //     if(23 >= futureIconOne && futureIconOne >= 8){      
+      //       futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+      //     }
+      //     if(27 >= futureIconOne && futureIconOne >= 24){
+      //       futureIconOne = '<i class="fa-solid fa-sun "></i>'
+      //     }
+      //     if( futureIconOne === 28){
+      //       futureIconOne = '<i class="fa-solid fa-cloud"></i>'
+      //     }
+      //     if( 41 >= futureIconOne && futureIconOne >= 29){
+      //       futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
+      //     }
+      //     this.futureDays[index].messageIcon = futureIconOne
+      //   }
+      // },
     },
     
   }
@@ -384,10 +392,16 @@
    #app{
     max-width: 1440px;
     width: 100%;
+    height: 100%;
     background-color: rgb(61, 50, 57);
     margin: auto;
-    button{
+    .btn{
       margin: 10px;
+      position: absolute;
+      z-index: 1;
+    }
+    .h-100{
+      position: relative;
     }
     .main{
       // height:100vh;
@@ -425,89 +439,89 @@
         //     }  
         //   }
         // }
-        .container_future{
-          width: 100%;
-          height: 500px;
-          background:#2c1725;
-          border-radius: 10% 10% 10% 10%;
-          .info_current{
-            padding-left: 40px;
-            padding-top: 20px;
-            color:#c6a8a8;
-            font-weight: 700;
-            .precipitation span:nth-child(2){
-              float: right;
-              padding-right: 60px;
-            }
-            .humidity span:nth-child(2){
-              float: right;
-              padding-right: 60px;
-            }
-            .wind span:nth-child(2){
-              float: right;
-              padding-right: 60px;
-            }
-          }
-          .forecast_weather{
-            margin: 20px 40px 0px 40px;
-            height: 250px;
-            .forecast_items{
-              color: #f18a45;
-              background-color:#241a27;
-              height: 100%;
-              text-align: center;
-              font-size: 30px;
+        // .container_future{
+        //   width: 100%;
+        //   height: 500px;
+        //   background:#2c1725;
+        //   border-radius: 10% 10% 10% 10%;
+        //   .info_current{
+        //     padding-left: 40px;
+        //     padding-top: 20px;
+        //     color:#c6a8a8;
+        //     font-weight: 700;
+        //     .precipitation span:nth-child(2){
+        //       float: right;
+        //       padding-right: 60px;
+        //     }
+        //     .humidity span:nth-child(2){
+        //       float: right;
+        //       padding-right: 60px;
+        //     }
+        //     .wind span:nth-child(2){
+        //       float: right;
+        //       padding-right: 60px;
+        //     }
+        //   }
+        //   .forecast_weather{
+        //     margin: 20px 40px 0px 40px;
+        //     height: 250px;
+        //     .forecast_items{
+        //       color: #f18a45;
+        //       background-color:#241a27;
+        //       height: 100%;
+        //       text-align: center;
+        //       font-size: 30px;
 
-              .dayone:hover{
-                color: #2c1725;
-                background-color:#c6a8a8;
-                transition: 0.4s;
-              }
-              .dayone{
-                background-color:#241a27;
-                border-radius: 20px;
-              }
-              .daytwo:hover{
-                color: #2c1725;
-                background-color: #c6a8a8;
-                transition: 0.4s;
-              }
-              .daytwo{
-                background-color: #241a27;
-                border-radius: 20px;
-              }
-              .daythree:hover{
-                color: #2c1725;
-                background-color: #c6a8a8;
-                transition: 0.4s;
-              }
-              .daythree{
-                background-color: #241a27;
-                border-radius: 20px;
-              }
-              .dayfour:hover{
-                color: #2c1725;
-                background-color: #c6a8a8;
-                transition: 0.4s;
-              }
-              .dayfour{
-                background-color: #241a27;
-                border-radius: 20px;
-              }
-            }
-          }
-          .place_items{
-            text-align: center;
-            padding: 40px;
-            .place_item{
-              background: #FDC830;  /* fallback for old browsers */
-              background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-              background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-              width: 80%;
-              height: 40px; 
-            }
-          }
-        }
+        //       .dayone:hover{
+        //         color: #2c1725;
+        //         background-color:#c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .dayone{
+        //         background-color:#241a27;
+        //         border-radius: 20px;
+        //       }
+        //       .daytwo:hover{
+        //         color: #2c1725;
+        //         background-color: #c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .daytwo{
+        //         background-color: #241a27;
+        //         border-radius: 20px;
+        //       }
+        //       .daythree:hover{
+        //         color: #2c1725;
+        //         background-color: #c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .daythree{
+        //         background-color: #241a27;
+        //         border-radius: 20px;
+        //       }
+        //       .dayfour:hover{
+        //         color: #2c1725;
+        //         background-color: #c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .dayfour{
+        //         background-color: #241a27;
+        //         border-radius: 20px;
+        //       }
+        //     }
+        //   }
+        //   .place_items{
+        //     text-align: center;
+        //     padding: 40px;
+        //     .place_item{
+        //       background: #FDC830;  /* fallback for old browsers */
+        //       background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+        //       background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        //       width: 80%;
+        //       height: 40px; 
+        //     }
+        //   }
+        // }
       }
     }
   }
@@ -520,6 +534,7 @@
   #app{
     max-width: 1440px;
     width: 100%;
+    height: 100%;
     background-color: rgb(61, 50, 57);
     margin: auto;
     button{
@@ -561,89 +576,89 @@
         //     }  
         //   }
         // }
-        .container_future{
-          width: 500px;
-          height: 500px;
-          background:#2c1725;
-          border-radius: 10% 10% 10% 10%;
-          .info_current{
-            padding-left: 40px;
-            padding-top: 20px;
-            color:#c6a8a8;
-            font-weight: 700;
-            .precipitation span:nth-child(2){
-              float: right;
-              padding-right: 60px;
-            }
-            .humidity span:nth-child(2){
-              float: right;
-              padding-right: 60px;
-            }
-            .wind span:nth-child(2){
-              float: right;
-              padding-right: 60px;
-            }
-          }
-          .forecast_weather{
-            margin: 20px 40px 0px 40px;
-            height: 250px;
-            .forecast_items{
-              color: #f18a45;
-              background-color:#241a27;
-              height: 100%;
-              text-align: center;
-              font-size: 30px;
-              .dayone:hover{
-                color: #2c1725;
-                background-color:#c6a8a8;
-                transition: 0.4s;
-              }
-              .dayone{
-                background-color:#241a27;
-                border-radius: 20px;                
-              }
-              .daytwo:hover{
-                color: #2c1725;
-                background-color: #c6a8a8;
-                transition: 0.4s;
-              }
-              .daytwo{
-                background-color: #241a27;
-                border-radius: 20px;                
-              }
-              .daythree:hover{
-                color: #2c1725;
-                background-color: #c6a8a8;
-                transition: 0.4s;
-              }
-              .daythree{
-                background-color: #241a27;
-                border-radius: 20px;                
-              }
-              .dayfour:hover{
-                color: #2c1725;
-                background-color: #c6a8a8;
-                transition: 0.4s;
-              }
-              .dayfour{
-                background-color: #241a27;
-                border-radius: 20px;                
-              }
-            }
-          }
-          .place_items{
-            text-align: center;
-            padding: 40px;
+        // .container_future{
+        //   width: 500px;
+        //   height: 500px;
+        //   background:#2c1725;
+        //   border-radius: 10% 10% 10% 10%;
+        //   .info_current{
+        //     padding-left: 40px;
+        //     padding-top: 20px;
+        //     color:#c6a8a8;
+        //     font-weight: 700;
+        //     .precipitation span:nth-child(2){
+        //       float: right;
+        //       padding-right: 60px;
+        //     }
+        //     .humidity span:nth-child(2){
+        //       float: right;
+        //       padding-right: 60px;
+        //     }
+        //     .wind span:nth-child(2){
+        //       float: right;
+        //       padding-right: 60px;
+        //     }
+        //   }
+        //   .forecast_weather{
+        //     margin: 20px 40px 0px 40px;
+        //     height: 250px;
+        //     .forecast_items{
+        //       color: #f18a45;
+        //       background-color:#241a27;
+        //       height: 100%;
+        //       text-align: center;
+        //       font-size: 30px;
+        //       .dayone:hover{
+        //         color: #2c1725;
+        //         background-color:#c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .dayone{
+        //         background-color:#241a27;
+        //         border-radius: 20px;                
+        //       }
+        //       .daytwo:hover{
+        //         color: #2c1725;
+        //         background-color: #c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .daytwo{
+        //         background-color: #241a27;
+        //         border-radius: 20px;                
+        //       }
+        //       .daythree:hover{
+        //         color: #2c1725;
+        //         background-color: #c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .daythree{
+        //         background-color: #241a27;
+        //         border-radius: 20px;                
+        //       }
+        //       .dayfour:hover{
+        //         color: #2c1725;
+        //         background-color: #c6a8a8;
+        //         transition: 0.4s;
+        //       }
+        //       .dayfour{
+        //         background-color: #241a27;
+        //         border-radius: 20px;                
+        //       }
+        //     }
+        //   }
+        //   .place_items{
+        //     text-align: center;
+        //     padding: 40px;
             
-            .place_item{
-              background: #FDC830;  /* fallback for old browsers */
-              background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-              background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-              width: 80%;
-              height: 40px; 
-            }
-          }
-        }
+        //     .place_item{
+        //       background: #FDC830;  /* fallback for old browsers */
+        //       background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+        //       background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        //       width: 80%;
+        //       height: 40px; 
+        //     }
+        //   }
+        // }
       }
     }
   }
@@ -657,6 +672,7 @@
     #app{
       max-width: 1440px;
       width: 100%;    
+      height: 100vh;
       background-color: rgb(61, 50, 57);
       margin: auto;
       button{
@@ -698,88 +714,88 @@
           //     }  
           //   }
           // }
-          .container_future{          
-            width: 500px;
-            height: 500px;
-            background:#2c1725;
-            border-radius: 0 10% 10% 0;            
-            .info_current{
-              padding-left: 40px;
-              padding-top: 20px;
-              color:#c6a8a8;
-              font-weight: 700;
-              .precipitation span:nth-child(2){
-                float: right;
-                padding-right: 60px;
-              }
-              .humidity span:nth-child(2){
-                float: right;
-                padding-right: 60px;
-              }
-              .wind span:nth-child(2){
-                float: right;
-                padding-right: 60px;
-              }
-            }
-            .forecast_weather{              
-              margin: 20px 40px 0px 40px;
-              height: 250px;
-              .forecast_items{                
-                color: #f18a45;
-                background-color:#241a27;
-                height: 100%;
-                text-align: center;
-                font-size: 30px;
-                .dayone:hover{
-                  color: #2c1725;
-                  background-color:#c6a8a8;
-                  transition: 0.4s;
-                }
-                .dayone{
-                  background-color:#241a27;
-                  border-radius: 20px;                  
-                }
-                .daytwo:hover{
-                  color: #2c1725;
-                  background-color: #c6a8a8;
-                  transition: 0.4s;
-                }
-                .daytwo{
-                  background-color: #241a27;
-                  border-radius: 20px;                  
-                }
-                .daythree:hover{
-                  color: #2c1725;
-                  background-color: #c6a8a8;
-                  transition: 0.4s;
-                }
-                .daythree{
-                  background-color: #241a27;
-                  border-radius: 20px;                  
-                }
-                .dayfour:hover{
-                  color: #2c1725;
-                  background-color: #c6a8a8;
-                  transition: 0.4s;
-                }
-                .dayfour{
-                  background-color: #241a27;
-                  border-radius: 20px;                  
-                }
-              }
-            }
-            .place_items{
-              text-align: center;
-              padding: 40px;              
-              .place_item{
-                background: #FDC830;  /* fallback for old browsers */
-                background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-                background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-                width: 80%;
-                height: 40px; 
-              }
-            }
-          }
+          // .container_future{          
+          //   width: 500px;
+          //   height: 500px;
+          //   background:#2c1725;
+          //   border-radius: 0 10% 10% 0;            
+          //   .info_current{
+          //     padding-left: 40px;
+          //     padding-top: 20px;
+          //     color:#c6a8a8;
+          //     font-weight: 700;
+          //     .precipitation span:nth-child(2){
+          //       float: right;
+          //       padding-right: 60px;
+          //     }
+          //     .humidity span:nth-child(2){
+          //       float: right;
+          //       padding-right: 60px;
+          //     }
+          //     .wind span:nth-child(2){
+          //       float: right;
+          //       padding-right: 60px;
+          //     }
+          //   }
+          //   .forecast_weather{              
+          //     margin: 20px 40px 0px 40px;
+          //     height: 250px;
+          //     .forecast_items{                
+          //       color: #f18a45;
+          //       background-color:#241a27;
+          //       height: 100%;
+          //       text-align: center;
+          //       font-size: 30px;
+          //       .dayone:hover{
+          //         color: #2c1725;
+          //         background-color:#c6a8a8;
+          //         transition: 0.4s;
+          //       }
+          //       .dayone{
+          //         background-color:#241a27;
+          //         border-radius: 20px;                  
+          //       }
+          //       .daytwo:hover{
+          //         color: #2c1725;
+          //         background-color: #c6a8a8;
+          //         transition: 0.4s;
+          //       }
+          //       .daytwo{
+          //         background-color: #241a27;
+          //         border-radius: 20px;                  
+          //       }
+          //       .daythree:hover{
+          //         color: #2c1725;
+          //         background-color: #c6a8a8;
+          //         transition: 0.4s;
+          //       }
+          //       .daythree{
+          //         background-color: #241a27;
+          //         border-radius: 20px;                  
+          //       }
+          //       .dayfour:hover{
+          //         color: #2c1725;
+          //         background-color: #c6a8a8;
+          //         transition: 0.4s;
+          //       }
+          //       .dayfour{
+          //         background-color: #241a27;
+          //         border-radius: 20px;                  
+          //       }
+          //     }
+          //   }
+          //   .place_items{
+          //     text-align: center;
+          //     padding: 40px;              
+          //     .place_item{
+          //       background: #FDC830;  /* fallback for old browsers */
+          //       background: -webkit-linear-gradient(to top, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+          //       background: linear-gradient(to top, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          //       width: 80%;
+          //       height: 40px; 
+          //     }
+          //   }
+          // }
         }
       }
     }
