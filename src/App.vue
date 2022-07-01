@@ -5,7 +5,9 @@
       <!-- <h1>天氣預報</h1> -->
       <div class="container d-flex align-items-center">
         <div class="container_under d-flex ">
-          <div class="container_now">
+
+          <NowWeather :api='api'></NowWeather>
+          <!-- <div class="container_now">
             <div class="background_city">
               <div class="Target">
                 <h2 class="worship">{{ howDay }}</h2>  
@@ -18,7 +20,9 @@
                 <h3 class="weather-desc">{{ howWeather }}</h3>
               </div> 
             </div>
-          </div>
+          </div> -->
+
+
           <div class="container_future ">
             <div class="info_current d-flex flex-column">
               <div v-for="(item, index) in weatherInformation" :key='"item"+index' class="precipitation">
@@ -115,16 +119,19 @@
         weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
         monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
         weekAbbreviation: ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'],
-        cites:[]
+        cites:[],
+        api:{
+          messageApi:'',
+        }
       }
     },
     methods: {
       /**  顯示星期 */
-      showWeek: function() {   
-        const birthday = new Date();
-        const day1 = birthday.getDay();
-        this.showFutureWeek(day1)
-        this.howDay = this.weekDay[day1]
+      showWeek: function() {         
+      const birthday = new Date();
+      const day1 = birthday.getDay();
+      this.showFutureWeek(day1)
+      this.howDay = this.weekDay[day1]
       },
       /** 顯示未來星期 */
       showFutureWeek: function(day1) {
@@ -166,6 +173,7 @@
         this.axios
         .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821&locationId=F-D0047-063' ) 
         .then ( response => { 
+          // this.api.messageApi = response
           console.log(response)
           this.showCity(response)
         }) 
@@ -177,9 +185,10 @@
       },
       /** 顯示地區 */
       showCity(response){ 
-        const city = response.data.records.locations[0].location 
-        this.showTemperature(city)
-        this.showWeather(city)
+        const city = response.data.records.locations[0].location
+        this.api = city
+        // this.showTemperature(city)
+        // this.showWeather(city)
         this.showPrecipitation(city)
         this.showHumidity(city)
         this.showWind(city)
@@ -190,11 +199,11 @@
         this.howPlace = cites
       },
       /** 顯示溫度 */
-      showTemperature: function(city){
-        const temperatures = city[7].weatherElement[1].time[0].elementValue[0].value
-        this.howTemperature = temperatures
-        //console.log(temperatures)
-      },
+      // showTemperature: function(city){
+      //   const temperatures = city[7].weatherElement[1].time[0].elementValue[0].value
+      //   this.howTemperature = temperatures
+      //   //console.log(temperatures)
+      // },
       /** 顯示天氣圖示 */
       showWeatherIcon: function(city){
         for (let index = 0; index < 4; index++) {
@@ -221,10 +230,10 @@
         }
       },
       /** 顯示天氣 */
-      showWeather: function(city){
-        const howWeathers = city[7].weatherElement[6].time[0].elementValue[0].value
-        this.howWeather = howWeathers 
-      },
+      // showWeather: function(city){
+      //   const howWeathers = city[7].weatherElement[6].time[0].elementValue[0].value
+      //   this.howWeather = howWeathers 
+      // },
       /** 顯示降雨率 */
       showPrecipitation: function(city){ 
         const cipitations = city[7].weatherElement[0].time[0].elementValue[0].value
@@ -351,8 +360,7 @@
           if( 7 >= futureIconOne && futureIconOne >= 5 ){
             futureIconOne = '<i class="fa-solid fa-cloud"></i>'
           }
-          if(23 >= futureIconOne && futureIconOne >= 8){
-            console.log(123)
+          if(23 >= futureIconOne && futureIconOne >= 8){      
             futureIconOne = '<i class="fa-solid fa-cloud-rain"></i> '
           }
           if(27 >= futureIconOne && futureIconOne >= 24){
@@ -382,41 +390,41 @@
       margin: 10px;
     }
     .main{
-      height:100vh;
+      // height:100vh;
       .container{
         align-items: center;
         justify-content: center;
-        .container_now{
-          background-image: url('@/assets/01.jpeg');
-          background-repeat:no-repeat;
-          background-size: cover;
-          width: 100%;
-          height: 500px;
-          margin-left: 0;
-          border-radius: 50px;
-          z-index: 2;
-          .background_city{
-            width: 100%;
-            height: 100%;
-            border-radius: 50px;
-            opacity: 0.8;
-            background: #FDC830;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            .Target{
-              padding-left:20px ;
-              padding-top:20px ;
-            }
-            .current{
-              padding-left:20px ;
-              padding-top:160px ;
-              .icon{
-                font-size: 50px;
-                padding-bottom: 10px;
-              }
-            }  
-          }
-        }
+        // .container_now{
+        //   background-image: url('@/assets/01.jpeg');
+        //   background-repeat:no-repeat;
+        //   background-size: cover;
+        //   width: 100%;
+        //   height: 500px;
+        //   margin-left: 0;
+        //   border-radius: 50px;
+        //   z-index: 2;
+        //   .background_city{
+        //     width: 100%;
+        //     height: 100%;
+        //     border-radius: 50px;
+        //     opacity: 0.8;
+        //     background: #FDC830;  /* fallback for old browsers */
+        //     background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+        //     background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        //     .Target{
+        //       padding-left:20px ;
+        //       padding-top:20px ;
+        //     }
+        //     .current{
+        //       padding-left:20px ;
+        //       padding-top:160px ;
+        //       .icon{
+        //         font-size: 50px;
+        //         padding-bottom: 10px;
+        //       }
+        //     }  
+        //   }
+        // }
         .container_future{
           width: 100%;
           height: 500px;
@@ -518,41 +526,41 @@
       margin: 10px;
     }
     .main{
-      height:100vh;
+      // height:100vh;
       .container{
       align-items: center;
       justify-content: center;
-        .container_now{
-          background-image: url('@/assets/01.jpeg');
-          background-repeat:no-repeat;
-          background-size: cover;
-          width: 420px;
-          height: 500px;
-          margin-left: 40px;
-          border-radius: 50px;
-          z-index: 2;
-          .background_city{
-            width: 100%;
-            height: 100%;
-            border-radius: 50px;
-            opacity: 0.8;
-            background: #FDC830;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            .Target{
-              padding-left:20px ;
-              padding-top:20px ;
-            }
-            .current{
-              padding-left:20px ;
-              padding-top:160px ;
-              .icon{
-                font-size: 50px;
-                padding-bottom: 10px;
-              }
-            }  
-          }
-        }
+        // .container_now{
+        //   background-image: url('@/assets/01.jpeg');
+        //   background-repeat:no-repeat;
+        //   background-size: cover;
+        //   width: 420px;
+        //   height: 500px;
+        //   margin-left: 40px;
+        //   border-radius: 50px;
+        //   z-index: 2;
+        //   .background_city{
+        //     width: 100%;
+        //     height: 100%;
+        //     border-radius: 50px;
+        //     opacity: 0.8;
+        //     background: #FDC830;  /* fallback for old browsers */
+        //     background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+        //     background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        //     .Target{
+        //       padding-left:20px ;
+        //       padding-top:20px ;
+        //     }
+        //     .current{
+        //       padding-left:20px ;
+        //       padding-top:160px ;
+        //       .icon{
+        //         font-size: 50px;
+        //         padding-bottom: 10px;
+        //       }
+        //     }  
+        //   }
+        // }
         .container_future{
           width: 500px;
           height: 500px;
@@ -655,41 +663,41 @@
         margin: 10px;
       }
       .main{
-        height:100vh;
+        // height:100vh;
         .container{
         align-items: center;
         justify-content: center;
-          .container_now{
-            background-image: url('@/assets/01.jpeg');
-            background-repeat:no-repeat;
-            background-size: cover;
-            width: 400px;            
-            height: 500px;
-            margin-left: 0px;
-            border-radius: 50px;
-            z-index: 2;
-            .background_city{
-              width: 100%;
-              height: 100%;
-              border-radius: 50px;
-              opacity: 0.8;
-              background: #FDC830;  /* fallback for old browsers */
-              background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-              background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-              .Target{
-                padding-left:20px ;
-                padding-top:20px ;
-              }
-              .current{
-                padding-left:20px ;
-                padding-top:160px ;
-                .icon{
-                  font-size: 50px;
-                  padding-bottom: 10px;
-                }
-              }  
-            }
-          }
+          // .container_now{
+          //   background-image: url('@/assets/01.jpeg');
+          //   background-repeat:no-repeat;
+          //   background-size: cover;
+          //   width: 400px;            
+          //   height: 500px;
+          //   margin-left: 0px;
+          //   border-radius: 50px;
+          //   z-index: 2;
+          //   .background_city{
+          //     width: 100%;
+          //     height: 100%;
+          //     border-radius: 50px;
+          //     opacity: 0.8;
+          //     background: #FDC830;  /* fallback for old browsers */
+          //     background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+          //     background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          //     .Target{
+          //       padding-left:20px ;
+          //       padding-top:20px ;
+          //     }
+          //     .current{
+          //       padding-left:20px ;
+          //       padding-top:160px ;
+          //       .icon{
+          //         font-size: 50px;
+          //         padding-bottom: 10px;
+          //       }
+          //     }  
+          //   }
+          // }
           .container_future{          
             width: 500px;
             height: 500px;
