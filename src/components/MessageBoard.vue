@@ -1,5 +1,5 @@
 <template>
-		<div class="message_board">
+		<div  class="message_board" >
 			<div class="banner">
 				<h1>Message Board</h1>
 			</div>
@@ -21,21 +21,23 @@
 export default {
 	data(){
 		return{
+			props:['change'],
 			input:{
 				messageName:'name',
 				messageComment:'哈囉',
-			}	
+			},
+			
 		}
 	},
 	methods:{
-		handleSubmit:function(){
-			// const data = {
-			// 	messageName: this.input.messageName,
-			// 	messageComment: this.input.messageComment,
-			// }
-			console.log(this.input)
-			// console.log(data)
-		}
+		handleSubmit:function() {
+			const data = {
+				messageName: this.input.messageName,
+				messageComment: this.input.messageComment,
+			}			
+			console.log(data)
+		},
+		
 	}
 }
 </script>
