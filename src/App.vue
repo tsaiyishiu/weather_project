@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <b-button variant="outline-warning">留言</b-button>
+    <div class="menu">
+      <b-button variant="outline-warning">留言</b-button>
+      <b-button variant="outline-warning">Home</b-button>
+    </div>  
     <div class="d-flex justify-content-center h-100">      
       <div class="main d-flex">
         <!-- <h1>天氣預報</h1> -->
@@ -390,6 +393,7 @@
 
 <style lang="scss">
    #app{
+    // display: none;    
     max-width: 1440px;
     width: 100%;
     height: 100%;
@@ -397,11 +401,11 @@
     margin: auto;
     .btn{
       margin: 10px;
-      position: absolute;
-      z-index: 1;
+      // position: relative;
+      // z-index: 1;
     }
     .h-100{
-      position: relative;
+      // position: relative;
     }
     .main{
       // height:100vh;
@@ -537,8 +541,13 @@
     height: 100%;
     background-color: rgb(61, 50, 57);
     margin: auto;
-    button{
+    .btn{
       margin: 10px;
+      // position: relative;
+      // z-index: 1;
+    }
+    .h-100{
+      // position: relative;
     }
     .main{
       // height:100vh;
@@ -672,11 +681,20 @@
     #app{
       max-width: 1440px;
       width: 100%;    
-      height: 100vh;
+      min-height: 100vh;
       background-color: rgb(61, 50, 57);
       margin: auto;
-      button{
-        margin: 10px;
+      .homebtn.btn{
+        // position: relative;
+      }
+      .btn{
+      margin: 10px;
+      // position: absolute;
+      // z-index: 1;
+      }
+      .h-100{
+        min-height: 100vh;
+      // position: relative;
       }
       .main{
         // height:100vh;
