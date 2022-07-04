@@ -54,7 +54,8 @@
           </div>
         </div>
       </div>
-    </div> 
+    </div>
+    <MessageBoard></MessageBoard>
   </div>
   
 
@@ -393,7 +394,6 @@
 
 <style lang="scss">
    #app{
-    // display: none;    
     max-width: 1440px;
     width: 100%;
     height: 100%;
