@@ -2,41 +2,61 @@
 		<div  class="message_board" >
 			<div class="banner">
 				<h1>Message Board</h1>
-			</div>
-			<div >
-				<b-button variant="outline-warning">Home</b-button>
-			</div>
+			</div>			
 			<div class="message_form">
-					<label for="name">Name</label>
-					<input v-model="input.messageName" type="text" id="name">
-					<label for="comment">Comment</label>
-					<textarea v-model="input.messageComment" name="comment" id="comment" cols="30" rows="10"></textarea>
+				<label for="name">Name</label>
+				<input v-model="inputName" type="text" id="name">
+				<label for="comment">Comment</label>				
+				<textarea v-model="inputComment" name="comment" id="comment" cols="30" rows="10"></textarea>
 			</div>
 			<div class="send">
-					<input v-on:click='handleSubmit' type="submit" value="submit">
+				<input v-on:click='handleSubmit()' type="submit" value="submit">
+				<ul class="message_area">
+					<li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
+						<label :for="'item'+index">{{ item.messageName }}</label>
+						<!-- <label :for="'item'+index"></label> -->
+					</li>
+					<li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
+						<label :for="'item'+index">{{ item.messageComment }}</label>
+					</li>	
+				</ul>
 			</div>
 		</div>
 </template>
 <script>
-export default {
+export default {	
 	data(){
 		return{
 			props:['change'],
-			input:{
-				messageName:'name',
-				messageComment:'哈囉',
-			},
-			
+			input:[
+				// messageName:'蔡易修',
+				// messageComment:'哈囉',
+			],
+			// nmaeItem:'',
+			// commentItem:'',
+			inputName:'',
+			inputComment:'',
 		}
+
+	},
+	mounted(){
+		// this.addNameItem()
 	},
 	methods:{
-		handleSubmit:function() {
-			const data = {
-				messageName: this.input.messageName,
-				messageComment: this.input.messageComment,
-			}			
-			console.log(data)
-		},
+		
+		handleSubmit:function(){
+			const nameText = this.inputName
+			const commentItem = this.inputComment
+			const item = {
+        messageName: nameText,
+				messageComment: commentItem,
+        done: false 
+        };
+			this.input.push(item)
+			localStorage.setItem('items', JSON.stringify(this.input));
+			this.inputName = ''
+			this.inputComment = ''
+		}
 		
 	}
 }
@@ -76,6 +96,13 @@ export default {
 				.send{
 						input{
 								margin: 15px 0 0 200px;
+						}
+						ul{
+							list-style: none;
+							color: #c6a8a8;
+						}
+						.message_area{
+							height: 500px;
 						}
 				}
 		}

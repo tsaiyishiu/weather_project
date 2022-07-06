@@ -149,7 +149,7 @@ export default {
 </script>
 <style lang="scss">
     .container_future{
-        width: 100%;
+        width: 350px;
         height: 500px;
         background:#2c1725;
         border-radius: 10% 10% 10% 10%;
@@ -179,7 +179,7 @@ export default {
             background-color:#241a27;
             height: 100%;
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
 
             .dayone:hover{
             color: #2c1725;
