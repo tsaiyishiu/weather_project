@@ -13,18 +13,23 @@
 				<input v-on:click='handleSubmit()' type="submit" value="submit">
 				<ul class="message_area">
 					<li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
-						<label :for="'item'+index">{{ item.messageName }}</label>
+						<label :for="'item'+index">{{ item.messageName }}----------{{ item.messageTime }}</label>
+						<label :for="'item'+index">{{ item.messageComment }}</label>
 						<!-- <label :for="'item'+index"></label> -->
 					</li>
-					<li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
+					<!-- <li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
 						<label :for="'item'+index">{{ item.messageComment }}</label>
-					</li>	
+					</li>	 -->
 				</ul>
 			</div>
 		</div>
 </template>
 <script>
 export default {	
+	created(){
+		const getItems = JSON.parse(localStorage.getItem('items')) || []
+		this.input = getItems
+	},
 	data(){
 		return{
 			props:['change'],
@@ -36,26 +41,34 @@ export default {
 			// commentItem:'',
 			inputName:'',
 			inputComment:'',
+			inputTime:'',
 		}
 
 	},
 	mounted(){
-		// this.addNameItem()
+		// this.messageTime()
 	},
 	methods:{
-		
 		handleSubmit:function(){
+			this.messageTime()
 			const nameText = this.inputName
 			const commentItem = this.inputComment
+			const timeItem = this.inputTime
 			const item = {
         messageName: nameText,
 				messageComment: commentItem,
+				messageTime: timeItem,
         done: false 
         };
 			this.input.push(item)
 			localStorage.setItem('items', JSON.stringify(this.input));
 			this.inputName = ''
 			this.inputComment = ''
+		},
+		messageTime:function(){
+			const	myDay = new Date()
+			const nowTime = myDay.toLocaleString()
+			this.inputTime = nowTime			
 		}
 		
 	}
@@ -100,9 +113,14 @@ export default {
 						ul{
 							list-style: none;
 							color: #c6a8a8;
+							li{
+								label{
+									display: block;
+								}
+							}
 						}
 						.message_area{
-							height: 500px;
+							height: 100%;
 						}
 				}
 		}
