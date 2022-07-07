@@ -75,53 +75,165 @@ export default {
 }
 </script>
 <style lang="scss">
-		.message_board{
-				.banner{
-						h1{
-								height: 150px;
-								display: flex;
-								align-items: center;
-								justify-content: center;
-								background: #FDC830;  /* fallback for old browsers */
-								background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
-								background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-						}
-				}
-				.message_form{
-						margin: 0 200px 0 200px;
-						label{
-								display: block;
-								color: #c6a8a8;
-								font-size: 25px;
-								text-align: center;
-								padding-top: 50px;
-						}            
-						input:nth-child(2){
-								width: 100%;
-								font-size: 30px;
-						}
-						textarea:nth-child(4){
-								width: 100%;
-								height: 200px;
-								font-size: 30px;
-						}
-				}
-				.send{
-						input{
-								margin: 15px 0 0 200px;
-						}
-						ul{
-							list-style: none;
-							color: #c6a8a8;
-							li{
-								label{
-									display: block;
-								}
-							}
-						}
-						.message_area{
-							height: 100%;
-						}
+@media (min-width: 1024px){
+	.message_board{
+		.banner{
+			h1{
+				height: 150px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: #FDC830;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 				}
 		}
+		.message_form{
+			margin: 0 200px 0 200px;
+			label{
+				display: block;
+				color: #c6a8a8;
+				font-size: 25px;
+				text-align: center;
+				padding-top: 50px;
+			}            
+			input:nth-child(2){
+				width: 100%;
+				font-size: 10px;
+			}
+			textarea:nth-child(4){
+				width: 100%;
+				height: 200px;
+				font-size: 10px;
+			}
+		}
+		.send{
+			input{
+				margin: 15px 0 0 200px;
+			}
+			ul{
+				list-style: none;
+				color: #c6a8a8;
+				padding-top: 30px;
+				margin: 0;
+				li{
+					label{
+						display: block;
+					}
+				}
+			}
+				.message_area{
+					height: 100%;
+				}
+		}
+	}
+}
+@media (min-width: 768px){
+	.message_board{
+		height: 100vh;
+		.banner{
+			h1{
+				height: 150px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: #FDC830;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+				}
+		}
+		.message_form{
+			margin: 0 100px 0 100px;
+			label{
+				display: block;
+				color: #c6a8a8;
+				font-size: 25px;
+				text-align: center;
+				padding-top: 50px;
+			}            
+			input:nth-child(2){
+				width: 100%;
+				font-size: 10px;
+			}
+			textarea:nth-child(4){
+				width: 100%;
+				height: 200px;
+				font-size: 10px;
+			}
+		}
+		.send{
+			input{
+				margin: 15px 0 0 100px;
+			}
+			ul{
+				list-style: none;
+				color: #c6a8a8;
+				padding-top: 30px;
+				margin: 0;
+				li{
+					label{
+						display: block;
+					}
+				}
+			}
+				.message_area{
+					height: 100%;
+				}
+		}
+	}
+}
+.message_board{
+		height: 100vh;
+		.banner{
+			h1{
+				height: 150px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: #FDC830;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to left, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to left, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+				}
+		}
+		.message_form{
+			margin: 0 50px 0 50px;
+			label{
+				display: block;
+				color: #c6a8a8;
+				font-size: 25px;
+				text-align: center;
+				padding-top: 50px;
+			}            
+			input:nth-child(2){
+				width: 100%;
+				font-size: 10px;
+			}
+			textarea:nth-child(4){
+				width: 100%;
+				height: 200px;
+				font-size: 10px;
+			}
+		}
+		.send{
+			input{
+				margin: 15px 0 0 50px;
+			}
+			ul{
+				list-style: none;
+				color: #c6a8a8;
+				padding-top: 30px;
+				margin: 0;
+				li{
+					label{
+						display: block;
+					}
+				}
+			}
+				.message_area{
+					height: 100%;
+				}
+		}
+	}
+
+		
 </style>
