@@ -183,7 +183,7 @@ export default {
 	}
 }
 .message_board{
-		height: 100vh;
+		height: 100%;
 		.banner{
 			h1{
 				height: 150px;
@@ -222,10 +222,14 @@ export default {
 				list-style: none;
 				color: #c6a8a8;
 				padding-top: 30px;
+				padding-right: 35px;
 				margin: 0;
 				li{
+					padding: 15px;
+					margin: 10px;
+					border: 2px solid #c6a8a8;
 					label{
-						display: block;
+						display: block;						
 					}
 				}
 			}
