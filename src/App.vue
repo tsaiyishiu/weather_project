@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <div class="menu">
-        <b-button @click='changeHandler' variant="outline-warning">留言</b-button>
+      <router-link to="/board" >
+        <b-button  variant="outline-warning">留言</b-button>
+      </router-link>
         <b-button @click='changeHandler' variant="outline-warning">Home</b-button>
-    </div>  
+    </div>
+    <router-view></router-view>
     <div v-show='change'  class="show">
       
       <div class="d-flex justify-content-center h-100">      
@@ -76,10 +79,29 @@
 </template>
 
 <script>
+import MessageBoard from './components/MessageBoard.vue'
   export default {
+  components: { MessageBoard },
     mounted(){
       this.getApi()
       this.today()
+      // const Home = { template: '<div>Home</div>' }
+      // const About = { template: '<div>About</div>' }
+
+      // const routes = [
+      //   {path: '/', component: Home },
+      //   {path: '/about', component: About }
+      // ]
+
+      // const router = VueRouter.createRouter({
+      //   history: VueRouter.createWebhistory(),
+      //   routes: routes,
+      // });
+
+      // const app = Vue.createApp({});
+
+      // app.use(router);
+      // app.mount('#app')
       // this.showWeek()
       // this.showYearMonthDays()
     },

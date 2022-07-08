@@ -15,11 +15,15 @@ Vue.prototype.axios = axios;
 Vue.use(VueAxios,axios)
 
 import "./components/index";
+import router from './router'
 // import HelloWorld from "./components/HelloWorld";
 // import LoremText from "./components/LoremText";
 // Vue.component('HelloWorld',HelloWorld)
 // Vue.component('LoremText',LoremText)
 
+Vue.config.productionTip = false
+
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')
