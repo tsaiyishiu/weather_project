@@ -58,6 +58,16 @@
 // import NowWeather from './NowWeather.vue'
 // import FutureWeather from './FutureWeather.vue'
 export default {
+  // props:['today'],
+  // watch:{
+  //   api: function(now, pre){
+  //     console.log(now, pre)
+  //     // const apiCity = now;
+  //   },
+  //   today: function(day, pre){
+  //     console.log(day, pre)
+  //   },
+  // },
   data() {
     return{
       
