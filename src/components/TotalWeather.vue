@@ -58,20 +58,94 @@
 // import NowWeather from './NowWeather.vue'
 // import FutureWeather from './FutureWeather.vue'
 export default {
-  // props:['today'],
-  // watch:{
-  //   api: function(now, pre){
-  //     console.log(now, pre)
-  //     // const apiCity = now;
-  //   },
-  //   today: function(day, pre){
-  //     console.log(day, pre)
-  //   },
-  // },
+  mounted(){
+    this.getApi()
+    this.today()
+  },
   data() {
     return{
-      
+      howDay:'' ,
+      yearMonthDay:'',
+      howPlace:'',
+      howTemperature:'',
+      howWeather:'',
+      icon:'',
+      weatherInformation:[
+        {
+         message:'precipitation',
+         messageData:'???',
+         messageunit:'%'
+        },
+        {
+         message:'humidity',
+         messageData:'???',
+         messageunit:'%'
+        },
+        {
+         message:'wind',
+         messageData:'???',
+         messageunit:'km/h',
+        },
+      ],
+      futureDays:[
+        {
+         messageIcon:'',
+         messageWeek:'Three',
+         messageTemperature:'29',
+        },
+        {
+         messageIcon:'',
+         messageWeek:'four',
+         messageTemperature:'223',
+        },
+        {
+         messageIcon:'',
+         messageWeek:'five',
+         messageTemperature:'12',
+        },  
+        {
+         messageIcon:'',
+         messageWeek:'six',
+         messageTemperature:'47',
+        }
+      ],
+        info : null,
+        weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
+        weekAbbreviation: ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'],
+        cites:[],
+        api:{
+          messageApi:'',
+        },
+        todaytoday:'', 
     }
-  }
+  },
+  methods: {
+    today: function(){
+      const NewToday = new Date()
+      const day1 = NewToday.getDay()
+      // this.showFutureWeek(day1)
+      this.todaytoday = day1
+    },
+    getApi: function() {
+      this.axios
+      .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821&locationId=F-D0047-063' ) 
+      .then ( response => { 
+        // this.api.messageApi = response
+        console.log(response)
+        this.showCity(response)
+      }) 
+      .catch ( 
+        function ( error ) { //請求失敗處理   
+        console.log( error );
+      })       
+    },
+    showCity(response){
+      const city = response.data.records.locations[0].location
+      this.api = city
+      const cites = city[7].locationName
+      this.howPlace = cites
+    },
+  },
 }
 </script>

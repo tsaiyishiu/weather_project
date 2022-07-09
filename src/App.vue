@@ -34,8 +34,8 @@
   export default {
   // components: { MessageBoard },
     mounted(){
-      this.getApi()
-      this.today()
+      // this.getApi()
+      // this.today()
       // const Home = { template: '<div>Home</div>' }
       // const About = { template: '<div>About</div>' }
 
@@ -57,8 +57,7 @@
       // this.showYearMonthDays()
     },
     data() {
-      return {
-        change:true,
+      return {        
         howDay:'' ,
         yearMonthDay:'',
         howPlace:'',
@@ -109,9 +108,9 @@
       }
     },
     methods: {
-      changeHandler: function(){
-        this.change = !this.change
-      },
+      // changeHandler: function(){
+      //   this.change = !this.change
+      // },
       /**  顯示星期 */
       // showWeek: function() {         
       // const birthday = new Date();
@@ -161,24 +160,24 @@
       //   const yearMonthDay = myDate.getFullYear()+' '+ this.monthDay[myDate.getMonth()] +' '+myDate.getDate()
       //   this.yearMonthDay = yearMonthDay
       // },
-      getApi: function() {
-        this.axios
-        .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821&locationId=F-D0047-063' ) 
-        .then ( response => { 
-          // this.api.messageApi = response
-          console.log(response)
-          this.showCity(response)
-        }) 
-        .catch ( 
-          function ( error ) { //請求失敗處理   
-          console.log( error );
-        }) 
+      // getApi: function() {
+      //   this.axios
+      //   .get ( 'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-093?Authorization=CWB-CEAB4C1A-D854-4B57-BB0E-0ACFB2760821&locationId=F-D0047-063' ) 
+      //   .then ( response => { 
+      //     // this.api.messageApi = response
+      //     console.log(response)
+      //     this.showCity(response)
+      //   }) 
+      //   .catch ( 
+      //     function ( error ) { //請求失敗處理   
+      //     console.log( error );
+      //   }) 
         
-      },
+      // },
       /** 顯示地區 */
-      showCity(response){ 
-        const city = response.data.records.locations[0].location
-        this.api = city
+      // showCity(response){ 
+      //   const city = response.data.records.locations[0].location
+      //   this.api = city
         // this.showTemperature(city)
         // this.showWeather(city)
         // this.showPrecipitation(city)
@@ -187,9 +186,9 @@
         // this.showFutureTemperature(city)
         // this.showFutureIcon(city)
         // this.showWeatherIcon(city)
-        const cites = city[7].locationName
-        this.howPlace = cites
-      },
+      //   const cites = city[7].locationName
+      //   this.howPlace = cites
+      // },
       /** 顯示溫度 */
       // showTemperature: function(city){
       //   const temperatures = city[7].weatherElement[1].time[0].elementValue[0].value
