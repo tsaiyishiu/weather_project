@@ -34,11 +34,14 @@ export default {
         api: function(future, pre){
             console.log(future, pre)
             const apiCity = future
-            this.showPrecipitation(apiCity)
-            this.showHumidity(apiCity)
-            this.showWind(apiCity)
-            this.showFutureTemperature(apiCity)
-            this.showFutureIcon(apiCity)
+            if(future != undefined && future.length != 0){
+              this.showPrecipitation(apiCity)
+              this.showHumidity(apiCity)
+              this.showWind(apiCity)
+              this.showFutureTemperature(apiCity)
+              this.showFutureIcon(apiCity)
+            }
+            
         },
         today: function(day, pre){
             console.log(day, pre)

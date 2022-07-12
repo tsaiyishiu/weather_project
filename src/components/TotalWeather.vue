@@ -55,23 +55,23 @@
     </div>
 </template>
 <script>
-// import NowWeather from './NowWeather.vue'
-// import FutureWeather from './FutureWeather.vue'
 export default {
-  // props:['today'],
-  // watch:{
-  //   api: function(now, pre){
-  //     console.log(now, pre)
-  //     // const apiCity = now;
-  //   },
-  //   today: function(day, pre){
-  //     console.log(day, pre)
-  //   },
-  // },
+  mounted(){    
+    this.todalApi()
+  },
+  
   data() {
     return{
-      
+      todaytoday:'',
+      api:[]
     }
-  }
+  },
+  methods:{
+    todalApi: function(){
+      this.api = this.$route.params.id
+      console.log(this.$route.params.id)
+      this.todaytoday = this.$route.params.id2      
+    }
+  },
 }
 </script>

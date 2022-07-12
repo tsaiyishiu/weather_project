@@ -4,14 +4,21 @@
       <router-link to="/board" >
         <b-button  variant="outline-warning">留言</b-button>
       </router-link>
-      <router-link to="/" >
+      <router-link 
+      :to="{
+        name:'TotalWeather',
+        params: {
+          id: api,
+          id2: todaytoday,
+        }
+      }" >
         <b-button  variant="outline-warning">Home</b-button>
       </router-link>  
     </div>
     <router-view></router-view>
-    <!-- <TotalWeather></TotalWeather>
+    <!-- <TotalWeather></TotalWeather> -->
     
-    <MessageBoard></MessageBoard> -->
+    <!-- <MessageBoard></MessageBoard> -->
   </div>
   
 
@@ -57,7 +64,7 @@
       // this.showYearMonthDays()
     },
     data() {
-      return {
+      return {        
         change:true,
         howDay:'' ,
         yearMonthDay:'',
@@ -102,10 +109,8 @@
         monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
         weekAbbreviation: ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'],
         cites:[],
-        api:{
-          messageApi:'',
-        },
-        todaytoday:'',
+        api:'123',
+        todaytoday:'123',
       }
     },
     methods: {

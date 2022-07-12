@@ -22,10 +22,13 @@ export default {
     api: function(now, pre) {
       console.log(now, pre)
       const apiCity = now;
-      this.showCity(apiCity)
-      this.showTemperature(apiCity)
-      this.showWeather(apiCity)
-      this.showWeatherIcon(apiCity)
+      if(now != undefined && now.length != 0){
+          this.showCity(apiCity)
+          this.showTemperature(apiCity)
+          this.showWeather(apiCity)
+          this.showWeatherIcon(apiCity)
+      }
+      
     },
     
   },
