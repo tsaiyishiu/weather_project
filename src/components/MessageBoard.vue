@@ -14,12 +14,8 @@
 				<ul class="message_area">
 					<li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
 						<label :for="'item'+index">{{ item.messageName }}----------{{ item.messageTime }}</label>
-						<label :for="'item'+index">{{ item.messageComment }}</label>
-						<!-- <label :for="'item'+index"></label> -->
-					</li>
-					<!-- <li v-for="(item,index) in input" :key="index + 'input'" :checked='item.done'>
-						<label :for="'item'+index">{{ item.messageComment }}</label>
-					</li>	 -->
+						<label :for="'item'+index">{{ item.messageComment }}</label>						
+					</li>					
 				</ul>
 			</div>
 		</div>
@@ -33,20 +29,14 @@ export default {
 	data(){
 		return{
 			props:['change'],
-			input:[
-				// messageName:'蔡易修',
-				// messageComment:'哈囉',
-			],
-			// nmaeItem:'',
-			// commentItem:'',
+			input:[],			
 			inputName:'',
 			inputComment:'',
 			inputTime:'',
 		}
-
 	},
 	mounted(){
-		// this.messageTime()
+		
 	},
 	methods:{
 		handleSubmit:function(){

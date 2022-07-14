@@ -50,8 +50,7 @@ export default {
    /**  顯示星期 */
     showWeek: function() {         
       const birthday = new Date();      
-      const day1 = birthday.getDay();
-      // this.showFutureWeek(day1)
+      const day1 = birthday.getDay();      
       this.howDay = this.weekDay[day1]
       
     },
@@ -63,16 +62,14 @@ export default {
       this.yearMonthDay = yearMonthDay
     },
     /** 顯示地區 */
-    showCity: function(city){
-      // const city = response.data.records.locations[0].location 
+    showCity: function(city){      
       const cites = city[7].locationName
       this.howPlace = cites
     },
     /** 顯示溫度 */
     showTemperature: function(city){
         const temperatures = city[7].weatherElement[1].time[0].elementValue[0].value
-        this.howTemperature = temperatures
-        //console.log(temperatures)
+        this.howTemperature = temperatures        
       },
       /** 顯示天氣狀況 */
     showWeather: function(city){
