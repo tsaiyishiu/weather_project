@@ -24,14 +24,15 @@
       </div>
     </div>
     <div class="place_items">
-      <button
-        v-for="(cities, index) in citiesItems"
-        :key="'cities' + index"
-        class="place_item"
-      >
-        <i class="fa-solid fa-location-dot"></i>
-        <span>Change location</span>
-      </button>
+      <div>
+        <b-dropdown id="dropdown-1" text="Change Location" class="m-md-2">
+          <b-dropdown-item
+            v-for="(cities, index) in citiesItems"
+            :key="'cities' + index"
+            >123</b-dropdown-item
+          >
+        </b-dropdown>
+      </div>
     </div>
   </div>
 </template>
