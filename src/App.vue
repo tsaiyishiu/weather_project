@@ -11,77 +11,70 @@
     <router-view></router-view>
     
   </div>
-  
-
-  
 </template>
 
 <script>
 
   export default {
 
-    mounted(){
-
-
-
-    },
+    mounted(){},
     data() {
       return {        
-        howDay:'' ,
-        yearMonthDay:'',
-        howPlace:'',
-        howTemperature:'',
-        howWeather:'',
-        icon:'',
-        weatherInformation:[
-          {message:'precipitation',
-           messageData:'???',
-           messageunit:'%'
-          },
-          {message:'humidity',
-           messageData:'???',
-           messageunit:'%'
-          },
-          {message:'wind',
-           messageData:'???',
-           messageunit:'km/h',
-          },
-        ],
-        futureDays:[
-          {messageIcon:'',
-           messageWeek:'Three',
-           messageTemperature:'29',
-          },
-          {messageIcon:'',
-           messageWeek:'four',
-           messageTemperature:'223',
-          },
-          {messageIcon:'',
-           messageWeek:'five',
-           messageTemperature:'12',
-          },  
-          {messageIcon:'',
-           messageWeek:'six',
-           messageTemperature:'47',
-          }
-        ],
-        info : null,
-        weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
-        weekAbbreviation: ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'],
-        cites:[],
-        api:{
-          messageApi:'',
-        },
-        todaytoday:'',
+        // howDay:'' ,
+        // yearMonthDay:'',
+        // howPlace:'',
+        // howTemperature:'',
+        // howWeather:'',
+        // icon:'',
+        // weatherInformation:[
+        //   {message:'precipitation',
+        //    messageData:'???',
+        //    messageunit:'%'
+        //   },
+        //   {message:'humidity',
+        //    messageData:'???',
+        //    messageunit:'%'
+        //   },
+        //   {message:'wind',
+        //    messageData:'???',
+        //    messageunit:'km/h',
+        //   },
+        // ],
+        // futureDays:[
+        //   {messageIcon:'',
+        //    messageWeek:'Three',
+        //    messageTemperature:'29',
+        //   },
+        //   {messageIcon:'',
+        //    messageWeek:'four',
+        //    messageTemperature:'223',
+        //   },
+        //   {messageIcon:'',
+        //    messageWeek:'five',
+        //    messageTemperature:'12',
+        //   },  
+        //   {messageIcon:'',
+        //    messageWeek:'six',
+        //    messageTemperature:'47',
+        //   }
+        // ],
+        // info : null,
+        // weekDay: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        // monthDay: ['Jan','Feb','Mar','Apr','May','Jun','Aug','Sept','Oct','Nov','Dec'],
+        // weekAbbreviation: ['Sun','Mon','Tues','Wed','Thurs','Fri','Sat'],
+        // cites:[],
+        // api:{
+        //   messageApi:'',
+        // },
+        // todaytoday:'',
       }
     },
     methods: {      
-      today: function(){
-        const NewToday = new Date()
-        const day1 = NewToday.getDay()        
-        this.todaytoday = day1
-      },      
+      // today: function(){
+      //   const NewToday = new Date()
+      //   const day1 = NewToday.getDay()        
+      //   this.todaytoday = day1
+      // },      
     },
     
   }
