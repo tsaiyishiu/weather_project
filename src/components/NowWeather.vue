@@ -22,13 +22,15 @@ export default {
     api: function (now, pre) {
       console.log(now, pre);
       const apiCity = now;
-      this.showCity(apiCity);
+      // this.showCity(apiCity);
       this.showTemperature(apiCity);
       this.showWeather(apiCity);
       this.showWeatherIcon(apiCity);
     },
     nowArea: function (now, pre) {
+      const showArea = now;
       console.log(now, pre);
+      this.showCity(showArea);
     },
   },
   mounted() {
@@ -87,11 +89,12 @@ export default {
       this.yearMonthDay = yearMonthDay;
     },
     /** 顯示地區 */
-    showCity: function (city) {
-      let defaultRegion = city.filter((item) => item.locationName === "信義區");
-      defaultRegion = defaultRegion.shift();
-      this.howPlace = defaultRegion.locationName;
-      console.log(defaultRegion);
+    showCity: function (nowArea) {
+      this.howPlace = nowArea;
+      // let defaultRegion = city.filter((item) => item.locationName === "信義區");
+      // defaultRegion = defaultRegion.shift();
+      // this.howPlace = defaultRegion.locationName;
+      // console.log(defaultRegion);
 
       // const cites = city[7].locationName;
       // this.howPlace = cites;

@@ -23,7 +23,6 @@ export default {
   mounted() {
     this.getApi();
     this.today();
-    this.childEvent();
   },
   data() {
     return {

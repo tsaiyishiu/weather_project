@@ -41,7 +41,9 @@
 
 <script>
 export default {
-  mounted() {},
+  mounted() {
+    this.changeArea();
+  },
   props: ["api", "today"],
   watch: {
     api: function (future, pre) {
