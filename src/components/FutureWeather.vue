@@ -25,13 +25,13 @@
     </div>
     <div class="place_items">
       <div>
-        <select name="" id="">
+        <select name="" id="" v-model="chooseArea" @change="changeArea">
           <option
-            v-for="(cities, index) in citiesItems"
-            :key="'cities' + index"
-            value=""
+            v-for="(area, index) in areaItems"
+            :key="'area' + index"
+            :value="area"
           >
-            {{ cities }}
+            {{ area }}
           </option>
         </select>
       </div>
@@ -41,12 +41,13 @@
 
 <script>
 export default {
+  mounted() {},
   props: ["api", "today"],
   watch: {
     api: function (future, pre) {
       console.log(future, pre);
       const apiCity = future;
-      this.citiesItems = apiCity;
+      // this.areaItems = apiCity;
       this.showPrecipitation(apiCity);
       this.showHumidity(apiCity);
       this.showWind(apiCity);
@@ -63,7 +64,8 @@ export default {
   computed: {},
   data() {
     return {
-      citiesItems: ["123"],
+      chooseArea: "信義區",
+      areaItems: [],
       weekAbbreviation: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
       weatherInformation: [
         { message: "precipitation", messageData: "???", messageunit: "%" },
@@ -79,22 +81,12 @@ export default {
     };
   },
   methods: {
+    changeArea: function () {
+      this.$emit("childEvent", this.chooseArea);
+    },
     changeCities: function (city) {
       const changecity = city.map((item) => item.locationName);
-      this.citiesItems = changecity;
-      console.log(this.citiesItems);
-      // this.citiesItems[0].city
-      // this.citiesItems[1].city
-      // this.citiesItems[2].city
-      // this.citiesItems[3].city
-      // this.citiesItems[4].city
-      // this.citiesItems[5].city
-      // this.citiesItems[6].city
-      // this.citiesItems[7].city
-      // this.citiesItems[8].city
-      // this.citiesItems[9].city
-      // this.citiesItems[10].city
-      // this.citiesItems[11].city
+      this.areaItems = changecity;
     },
     /** 顯示降雨率 */
     showPrecipitation: function (city) {

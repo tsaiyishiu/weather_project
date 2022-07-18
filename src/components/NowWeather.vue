@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ["api"],
+  props: ["api", "nowArea"],
   watch: {
     api: function (now, pre) {
       console.log(now, pre);
@@ -26,6 +26,9 @@ export default {
       this.showTemperature(apiCity);
       this.showWeather(apiCity);
       this.showWeatherIcon(apiCity);
+    },
+    nowArea: function (now, pre) {
+      console.log(now, pre);
     },
   },
   mounted() {
@@ -85,8 +88,13 @@ export default {
     },
     /** 顯示地區 */
     showCity: function (city) {
-      const cites = city[7].locationName;
-      this.howPlace = cites;
+      let defaultRegion = city.filter((item) => item.locationName === "信義區");
+      defaultRegion = defaultRegion.shift();
+      this.howPlace = defaultRegion.locationName;
+      console.log(defaultRegion);
+
+      // const cites = city[7].locationName;
+      // this.howPlace = cites;
     },
     /** 顯示溫度 */
     showTemperature: function (city) {
