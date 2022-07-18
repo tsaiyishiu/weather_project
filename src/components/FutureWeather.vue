@@ -25,13 +25,15 @@
     </div>
     <div class="place_items">
       <div>
-        <b-dropdown id="dropdown-1" text="Change Location" class="m-md-2">
-          <b-dropdown-item
+        <select name="" id="">
+          <option
             v-for="(cities, index) in citiesItems"
             :key="'cities' + index"
-            >123</b-dropdown-item
+            value=""
           >
-        </b-dropdown>
+            {{ cities }}
+          </option>
+        </select>
       </div>
     </div>
   </div>
@@ -44,11 +46,13 @@ export default {
     api: function (future, pre) {
       console.log(future, pre);
       const apiCity = future;
+      this.citiesItems = apiCity;
       this.showPrecipitation(apiCity);
       this.showHumidity(apiCity);
       this.showWind(apiCity);
       this.showFutureTemperature(apiCity);
       this.showFutureIcon(apiCity);
+      this.changeCities(apiCity);
     },
     today: function (day, pre) {
       console.log(day, pre);
@@ -56,9 +60,10 @@ export default {
       this.showFutureWeek(newToday);
     },
   },
+  computed: {},
   data() {
     return {
-      citiesItems: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
+      citiesItems: ["123"],
       weekAbbreviation: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
       weatherInformation: [
         { message: "precipitation", messageData: "???", messageunit: "%" },
@@ -74,6 +79,23 @@ export default {
     };
   },
   methods: {
+    changeCities: function (city) {
+      const changecity = city.map((item) => item.locationName);
+      this.citiesItems = changecity;
+      console.log(this.citiesItems);
+      // this.citiesItems[0].city
+      // this.citiesItems[1].city
+      // this.citiesItems[2].city
+      // this.citiesItems[3].city
+      // this.citiesItems[4].city
+      // this.citiesItems[5].city
+      // this.citiesItems[6].city
+      // this.citiesItems[7].city
+      // this.citiesItems[8].city
+      // this.citiesItems[9].city
+      // this.citiesItems[10].city
+      // this.citiesItems[11].city
+    },
     /** 顯示降雨率 */
     showPrecipitation: function (city) {
       const cipitations =
