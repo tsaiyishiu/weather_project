@@ -86,6 +86,7 @@ export default {
     changeArea: function () {
       this.$emit("childEvent", this.chooseArea);
     },
+    /** 抓出區域 */
     changeCities: function (city) {
       const changecity = city.map((item) => item.locationName);
       this.areaItems = changecity;

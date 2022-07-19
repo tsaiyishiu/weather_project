@@ -21,16 +21,20 @@ export default {
   watch: {
     api: function (now, pre) {
       console.log(now, pre);
-      const apiCity = now;
-      // this.showCity(apiCity);
-      this.showTemperature(apiCity);
-      this.showWeather(apiCity);
-      this.showWeatherIcon(apiCity);
+      const apiArea = now;
+      this.allArea = apiArea;
+      // this.showCity(apiArea);
+      this.showTemperature(apiArea);
+      this.showWeather(apiArea);
+      this.showWeatherIcon(apiArea);
     },
     nowArea: function (now, pre) {
       const showArea = now;
-      console.log(now, pre);
+      console.log(now, pre, this.allArea);
       this.showCity(showArea);
+      if (this.allArea.length > 0) {
+        this.showTemperature(this.allArea);
+      }
     },
   },
   mounted() {
@@ -39,6 +43,7 @@ export default {
   },
   data() {
     return {
+      allArea: [],
       howDay: "",
       yearMonthDay: "",
       howPlace: "",
@@ -91,31 +96,37 @@ export default {
     /** 顯示地區 */
     showCity: function (nowArea) {
       this.howPlace = nowArea;
-      // let defaultRegion = city.filter((item) => item.locationName === "信義區");
+      // let defaultRegion = allArea.filter((item) => item.locationName === "信義區");
       // defaultRegion = defaultRegion.shift();
       // this.howPlace = defaultRegion.locationName;
       // console.log(defaultRegion);
 
-      // const cites = city[7].locationName;
+      // const cites = allArea[7].locationName;
       // this.howPlace = cites;
     },
     /** 顯示溫度 */
-    showTemperature: function (city) {
-      const temperatures =
-        city[7].weatherElement[1].time[0].elementValue[0].value;
-      this.howTemperature = temperatures;
+    showTemperature: function (allArea) {
+      if (this.howPlace === "信義區") {
+        const temperatures =
+          allArea[7].weatherElement[1].time[0].elementValue[0].value;
+        this.howTemperature = temperatures;
+      }
+
+      // const temperatures =
+      //   allArea[7].weatherElement[1].time[0].elementValue[0].value;
+      // this.howTemperature = temperatures;
     },
     /** 顯示天氣狀況 */
-    showWeather: function (city) {
+    showWeather: function (allArea) {
       const howWeathers =
-        city[7].weatherElement[6].time[0].elementValue[0].value;
+        allArea[7].weatherElement[6].time[0].elementValue[0].value;
       this.howWeather = howWeathers;
     },
     /** 顯示天氣圖示 */
-    showWeatherIcon: function (city) {
+    showWeatherIcon: function (allArea) {
       for (let index = 0; index < 4; index++) {
         let weatherIcons = Number(
-          city[7].weatherElement[6].time[0].elementValue[1].value
+          allArea[7].weatherElement[6].time[0].elementValue[1].value
         );
         if (weatherIcons <= 4) {
           weatherIcons = '<i class="fa-solid fa-sun "></i>';

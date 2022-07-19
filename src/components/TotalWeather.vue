@@ -106,7 +106,7 @@ export default {
   methods: {
     childEvent: function (chooseArea) {
       this.nowArea = chooseArea;
-      console.log(chooseArea);
+      // console.log(chooseArea);
     },
     today: function () {
       const NewToday = new Date();
