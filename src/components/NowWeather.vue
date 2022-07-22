@@ -24,21 +24,23 @@ export default {
       const apiArea = now;
       this.allArea = apiArea;
       console.log(this.allArea);
-      this.showTemperature(apiArea);
-      // this.showCity(apiArea);
+      this.showTemperature(this.allArea); //台北市區資料
+      this.showCity(this.allArea);
 
-      this.showWeather(apiArea);
-      this.showWeatherIcon(apiArea);
+      this.showWeather(this.allArea);
+      this.showWeatherIcon(this.allArea);
     },
     nowArea: function (now, pre) {
-      const showArea = now;
-      console.log(now, pre, this.allArea);
-      this.showCity(showArea);
+      this.showArea = now;
+      // console.log(this.showArea);
+      console.log(now, pre);
+      this.showCity(this.showArea);
       console.log(this.allArea);
-      if (this.allArea.length > 0) {
-        this.showTemperature(this.allArea);
-        console.log(this.allArea);
-      }
+      this.showTemperature(this.allArea, this.showArea);
+      // if (this.allArea.length > 0) {
+      //   this.showTemperature(this.allArea, this.showArea);
+      //   console.log(this.allArea);
+      // }
     },
   },
   mounted() {
@@ -47,6 +49,7 @@ export default {
   },
   data() {
     return {
+      showArea: "",
       allArea: [],
       howDay: "",
       yearMonthDay: "",
@@ -70,6 +73,7 @@ export default {
         "Apr",
         "May",
         "Jun",
+        "JUL",
         "Aug",
         "Sept",
         "Oct",
@@ -100,6 +104,7 @@ export default {
     /** 顯示地區 */
     showCity: function (nowArea) {
       this.howPlace = nowArea;
+      console.log(nowArea);
       // let defaultRegion = allArea.filter((item) => item.locationName === "信義區");
       // defaultRegion = defaultRegion.shift();
       // this.howPlace = defaultRegion.locationName;
@@ -109,10 +114,12 @@ export default {
       // this.howPlace = cites;
     },
     /** 顯示溫度 */
-    showTemperature: function (allArea) {
+    showTemperature: function (allArea, showArea) {
+      console.log(allArea, showArea);
       let getLocation = allArea
-        .filter((item) => item.locationName === "信義區")
+        .filter((item) => item.locationName === showArea)
         .shift();
+      console.log(getLocation);
       let getweatherElement = getLocation.weatherElement
         .filter((item) => item.elementName === "T")
         .shift();
@@ -124,16 +131,6 @@ export default {
       let getTemperature = getElementValue.value;
       console.log(getTemperature);
       this.howTemperature = getTemperature;
-      // console.log(getFilterItem);
-
-      // getFilterItem.filter()
-      // console.log(getFilterItem);
-      //   allArea[7].weatherElement[1].time[0].elementValue[0].value;
-      // this.howTemperature = temperatures;
-
-      // const temperatures =
-      //   allArea[7].weatherElement[1].time[0].elementValue[0].value;
-      // this.howTemperature = temperatures;
     },
     /** 顯示天氣狀況 */
     showWeather: function (allArea) {

@@ -29,9 +29,9 @@
           <option
             v-for="(area, index) in areaItems"
             :key="'area' + index"
-            :value="area"
+            :value="area.locationName"
           >
-            {{ area }}
+            {{ area.locationName }}
           </option>
         </select>
       </div>
@@ -42,22 +42,24 @@
 <script>
 export default {
   mounted() {
-    this.changeArea();
+    // this.changeArea();
   },
-  props: ["api", "today"],
+  props: ["api", "showWeek"],
   watch: {
-    api: function (future, pre) {
-      console.log(future, pre);
+    api: function (future) {
+      // console.log(future, pre);
       const apiCity = future;
-      // this.areaItems = apiCity;
+      this.areaItems = apiCity;
+      this.chooseArea = "信義區";
+      this.$emit("childEvent", this.chooseArea);
       this.showPrecipitation(apiCity);
       this.showHumidity(apiCity);
       this.showWind(apiCity);
       this.showFutureTemperature(apiCity);
       this.showFutureIcon(apiCity);
-      this.changeCities(apiCity);
+      // this.changeCities(apiCity);
     },
-    today: function (day, pre) {
+    showWeek: function (day, pre) {
       console.log(day, pre);
       const newToday = day;
       this.showFutureWeek(newToday);
@@ -66,7 +68,7 @@ export default {
   computed: {},
   data() {
     return {
-      chooseArea: "信義區",
+      chooseArea: "",
       areaItems: [],
       weekAbbreviation: ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"],
       weatherInformation: [
@@ -87,10 +89,10 @@ export default {
       this.$emit("childEvent", this.chooseArea);
     },
     /** 抓出區域 */
-    changeCities: function (city) {
-      const changecity = city.map((item) => item.locationName);
-      this.areaItems = changecity;
-    },
+    // changeCities: function (city) {
+    //   const changecity = city.map((item) => item.locationName);
+    //   this.areaItems = changecity;
+    // },
     /** 顯示降雨率 */
     showPrecipitation: function (city) {
       const cipitations =

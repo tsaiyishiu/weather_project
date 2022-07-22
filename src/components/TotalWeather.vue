@@ -9,7 +9,7 @@
             <NowWeather :api="api" :nowArea="nowArea"></NowWeather>
             <FutureWeather
               :api="api"
-              :today="todaytoday"
+              :showWeek="showWeekItem"
               v-on:childEvent="childEvent"
             ></FutureWeather>
           </div>
@@ -22,7 +22,7 @@
 export default {
   mounted() {
     this.getApi();
-    this.today();
+    this.showWeek();
   },
   data() {
     return {
@@ -100,15 +100,15 @@ export default {
       api: {
         messageApi: "",
       },
-      todaytoday: "",
+      showWeekItem: "",
     };
   },
   methods: {
     childEvent: function (chooseArea) {
       this.nowArea = chooseArea;
-      // console.log(chooseArea);
+      console.log(chooseArea);
     },
-    today: function () {
+    showWeek: function () {
       const NewToday = new Date();
       const day1 = NewToday.getDay();
       this.todaytoday = day1;
@@ -128,10 +128,11 @@ export default {
         });
     },
     showCity(response) {
+      /** 只取臺北市資料 */
       const city = response.data.records.locations[0].location;
       this.api = city;
-      const cites = city[7].locationName;
-      this.howPlace = cites;
+      // const cites = city[7].locationName;
+      // this.howPlace = cites;
     },
   },
 };
